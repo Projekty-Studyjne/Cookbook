@@ -6,14 +6,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CookbookLibrary
+namespace CookbookLibrary.Entities
 {
     [Table("Users")]
     public class User
     {
         [Key]
         public int userId { get; set; }
-        [RegularExpression(@"^[a-zA-Z][a-zA-Z0-9]{5,19}$", ErrorMessage ="Characters are not allowed")]
+        [RegularExpression(@"^[a-zA-Z][a-zA-Z0-9]{5,19}$", ErrorMessage = "Characters are not allowed")]
         public string username { get; set; }
         [RegularExpression(@"^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$", ErrorMessage = "Characters are not allowed")]
         public string email { get; set; }

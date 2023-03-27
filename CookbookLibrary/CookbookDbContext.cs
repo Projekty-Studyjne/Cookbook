@@ -1,9 +1,11 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using CookbookLibrary.Entities;
+using Microsoft.EntityFrameworkCore;
 using System.Reflection;
 using System.Text.RegularExpressions;
 
 namespace CookbookLibrary
 {
+
     public class CookbookDbContext : DbContext
     {
         public DbSet<Category> Categories { get; set; }
@@ -24,21 +26,16 @@ namespace CookbookLibrary
         {
             modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetCallingAssembly());
 
-            //modelBuilder.Entity<CategoryRecipe>().HasNoKey();
-            //modelBuilder.Entity<IngredientRecipe>().HasNoKey();
-            //modelBuilder.Entity<UserRecipe>().HasNoKey();
-
             modelBuilder.Entity<CategoryRecipe>().HasKey(ep => new { ep.categoryId, ep.recipeId });
             modelBuilder.Entity<UserRecipe>().HasKey(ep => new { ep.userId, ep.recipeId });
             modelBuilder.Entity<IngredientRecipe>().HasKey(ep => new { ep.ingredientId, ep.recipeId });
 
-            //-------
             modelBuilder.Entity<CategoryRecipe>()
-        .HasOne<Category>(cr => cr.Category)
-        .WithMany(c => c.CategoryRecipes)
-        .HasForeignKey(cr => cr.categoryId)
-        .IsRequired()
-        .OnDelete(DeleteBehavior.Restrict);
+                .HasOne<Category>(cr => cr.Category)
+                .WithMany(c => c.CategoryRecipes)
+                .HasForeignKey(cr => cr.categoryId)
+                .IsRequired()
+                .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<CategoryRecipe>()
                 .HasOne<Recipe>(cr => cr.Recipe)
@@ -46,7 +43,7 @@ namespace CookbookLibrary
                 .HasForeignKey(cr => cr.recipeId)
                 .IsRequired()
                 .OnDelete(DeleteBehavior.Restrict);
-            //---------
+
             modelBuilder.Entity<IngredientRecipe>()
                 .HasOne<Recipe>(ir => ir.Recipe)
                 .WithMany(r => r.IngredientRecipes)
@@ -60,7 +57,7 @@ namespace CookbookLibrary
                 .HasForeignKey(ir => ir.ingredientId)
                 .IsRequired()
                 .OnDelete(DeleteBehavior.Restrict);
-            //------
+
             modelBuilder.Entity<UserRecipe>()
                 .HasOne<Recipe>(ur => ur.Recipe)
                 .WithMany(r => r.UserRecipes)
@@ -97,10 +94,10 @@ namespace CookbookLibrary
                 .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<Ingredient>().HasData(
-    new Ingredient { ingredientId = 1, name = "Egg", category = "Protein" },
-    new Ingredient { ingredientId = 2, name = "Milk", category = "Dairy" },
-    new Ingredient { ingredientId = 3, name = "Flour", category = "Grains" }
-);
+                new Ingredient { ingredientId = 1, name = "Egg", category = "Protein" },
+                new Ingredient { ingredientId = 2, name = "Milk", category = "Dairy" },
+                new Ingredient { ingredientId = 3, name = "Flour", category = "Grains" }
+        );
             modelBuilder.Entity<IngredientRecipe>().HasData(
                 new IngredientRecipe { ingredientId = 1, recipeId = 1, quantity = 4, unit = "large" },
                 new IngredientRecipe { ingredientId = 2, recipeId = 1, quantity = 1 / 4, unit = "cup" },
@@ -141,19 +138,19 @@ namespace CookbookLibrary
                   new Category { categoryId = 1, name = "Breakfast", description = "Delicious breakfast recipes" },
                   new Category { categoryId = 2, name = "Dinner", description = "Tasty dinner recipes" },
                   new Category { categoryId = 3, name = "Desserts", description = "Yummy desserts recipes" }
-              );
+            );
 
             modelBuilder.Entity<CategoryRecipe>().HasData(
-        new CategoryRecipe { categoryId = 1, recipeId = 1 },
+                new CategoryRecipe { categoryId = 1, recipeId = 1 },
                 new CategoryRecipe { categoryId = 2, recipeId = 2 },
                 new CategoryRecipe { categoryId = 3, recipeId = 3 }
-    );
+            );
 
 
             modelBuilder.Entity<User>().HasData(
                 new User { userId = 1, username = "johnsmith", email = "johnsmith@gmail.com", password = "Abcd1234!" },
                 new User { userId = 2, username = "janedoe", email = "janedoe@yahoo.com", password = "Efg4567@" },
-            new User { userId = 3, username = "pkow", email = "pkow2137@student.polsl.com", password = "2137" }
+                new User { userId = 3, username = "pkow", email = "pkow2137@student.polsl.com", password = "2137" }
             );
 
             modelBuilder.Entity<UserRecipe>().HasData(

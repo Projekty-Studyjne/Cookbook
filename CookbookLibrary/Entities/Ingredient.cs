@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CookbookLibrary
+namespace CookbookLibrary.Entities
 {
     [Table("Ingredients")]
     public class Ingredient
@@ -17,7 +17,7 @@ namespace CookbookLibrary
         public string name { get; set; }
         [StringLength(50)]
         public string category { get; set; }
-        public virtual ICollection<IngredientRecipe> IngredientRecipes{ get; set; }
+        public virtual ICollection<IngredientRecipe> IngredientRecipes { get; set; }
 
     }
 }

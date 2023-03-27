@@ -6,14 +6,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CookbookLibrary
+namespace CookbookLibrary.Entities
 {
     [Table("Ratings")]
     public class Rating
     {
         [Key]
         public int ratingId { get; set; }
-        [Range(1,5)]
+        [Range(1, 5)]
         public int rating { get; set; }
         [ForeignKey("Users")]
         public int userId { get; set; }

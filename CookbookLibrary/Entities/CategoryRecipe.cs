@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CookbookLibrary
+namespace CookbookLibrary.Entities
 {
     [Table("CategoryRecipe")]
     public class CategoryRecipe

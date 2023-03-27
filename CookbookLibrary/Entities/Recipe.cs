@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CookbookLibrary
+namespace CookbookLibrary.Entities
 {
     [Table("Recipes")]
     public class Recipe
@@ -20,9 +20,9 @@ namespace CookbookLibrary
         public string description { get; set; }
         [StringLength(1000)]
         public string instructions { get; set; }
-        [Range(0.1,double.MaxValue)]
+        [Range(0.1, double.MaxValue)]
         public double preparation_time { get; set; }
-        [Range(1,int.MaxValue)]
+        [Range(1, int.MaxValue)]
         public int servings { get; set; }
 
         public virtual ICollection<IngredientRecipe> IngredientRecipes { get; set; }
