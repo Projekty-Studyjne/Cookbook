@@ -9,12 +9,18 @@ using CookbookLibrary;
 using CookbookLibrary.Entities;
 using CookbookLibrary.Repositories;
 using System.Data;
+using CookbookLibrary.RepositoryInterfaces;
 
 namespace CookbookMVC.Controllers
 {
     public class RatingsController : Controller
     {
-        private UnitOfWork unitOfWork = new UnitOfWork();
+        private IUnitOfWork unitOfWork;
+
+        public RatingsController(IUnitOfWork _unitOfWork)
+        {
+            unitOfWork = _unitOfWork;
+        }
 
         public ViewResult Index()
         {

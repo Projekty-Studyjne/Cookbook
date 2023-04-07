@@ -19,9 +19,9 @@ namespace CookbookMVC.Controllers
         private IUnitOfWork unitOfWork;
 
         public UsersController(IUnitOfWork _unitOfWork) {
-            _unitOfWork = unitOfWork;
+            unitOfWork = _unitOfWork;
         }
-             
+
         public ViewResult Index()
         {
             var user = unitOfWork.UserRepository.Get(includeProperties: "Ratings,UserRecipes");

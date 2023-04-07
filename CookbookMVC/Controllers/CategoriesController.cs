@@ -9,12 +9,19 @@ using CookbookLibrary;
 using CookbookLibrary.Entities;
 using CookbookLibrary.Repositories;
 using System.Data;
+using CookbookLibrary.RepositoryInterfaces;
+using System.Xml;
 
 namespace CookbookMVC.Controllers
 {
     public class CategoriesController : Controller
     {
-        private UnitOfWork unitOfWork = new UnitOfWork();
+        private IUnitOfWork unitOfWork;
+
+        public CategoriesController(IUnitOfWork _unitOfWork)
+        {
+            unitOfWork = _unitOfWork;
+        }
 
         public ViewResult Index()
         {

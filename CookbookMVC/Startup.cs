@@ -25,7 +25,6 @@ namespace CookbookMVC
         {
             services.AddDbContext<CookbookDbContext>(options =>
                 options.UseSqlServer(_configuration.GetConnectionString("DefaultConnection")));
-            services.AddScoped<IUserRepository, UserRepository>();
         }
     }
 }

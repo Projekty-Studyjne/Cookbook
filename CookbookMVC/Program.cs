@@ -1,9 +1,19 @@
+using CookbookLibrary.Entities;
+using CookbookLibrary.Repositories;
+using CookbookLibrary.RepositoryInterfaces;
+using CookbookLibrary;
+using CookbookMVC.Controllers;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddTransient<IUnitOfWork, UnitOfWork>();
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
+
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
