@@ -1,4 +1,6 @@
 ﻿using CookbookLibrary;
+using CookbookLibrary.Repositories;
+using CookbookLibrary.RepositoryInterfaces;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -23,6 +25,7 @@ namespace CookbookMVC
         {
             services.AddDbContext<CookbookDbContext>(options =>
                 options.UseSqlServer(_configuration.GetConnectionString("DefaultConnection")));
+            services.AddScoped<IUserRepository, UserRepository>();
         }
     }
 }

@@ -9,13 +9,19 @@ using CookbookLibrary;
 using CookbookLibrary.Entities;
 using CookbookLibrary.Repositories;
 using System.Data;
+using CookbookLibrary.RepositoryInterfaces;
+using Microsoft.Identity.Client;
 
 namespace CookbookMVC.Controllers
 {
     public class UsersController : Controller
     {
-        private UnitOfWork unitOfWork = new UnitOfWork();
+        private IUnitOfWork unitOfWork;
 
+        public UsersController(IUnitOfWork _unitOfWork) {
+            _unitOfWork = unitOfWork;
+        }
+             
         public ViewResult Index()
         {
             var user = unitOfWork.UserRepository.Get(includeProperties: "Ratings,UserRecipes");
