@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace CookbookLibrary.Repositories
 {
-    public class UnitOfWork : IDisposable
+    public class UnitOfWork : IUnitOfWork, IDisposable
     {
         private CookbookDbContext context = new CookbookDbContext();
         private GenericRepository<Category> categoryRepository;
@@ -144,7 +144,7 @@ namespace CookbookLibrary.Repositories
 
         private bool disposed = false;
 
-        protected virtual void Dispose(bool disposing)
+        public virtual void Dispose(bool disposing)
         {
             if (!this.disposed)
             {
