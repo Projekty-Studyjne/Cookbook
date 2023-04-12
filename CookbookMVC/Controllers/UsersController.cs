@@ -46,7 +46,7 @@ namespace CookbookMVC.Controllers
             if (ModelState.IsValid)
             {
                 unitOfWork.UserRepository.Insert(user);
-                unitOfWork.Save();
+                await unitOfWork.SaveAsync();
                 return RedirectToAction(nameof(Index));
             }
             return View(user);
@@ -72,7 +72,7 @@ namespace CookbookMVC.Controllers
                 try
                 {
                     unitOfWork.UserRepository.Update(user);
-                    unitOfWork.Save();
+                    await unitOfWork.SaveAsync();
                 }
                 catch (DataException)
                 {
@@ -97,7 +97,7 @@ namespace CookbookMVC.Controllers
         {
             User user = unitOfWork.UserRepository.GetByID(id);
             unitOfWork.UserRepository.Delete(id);
-            unitOfWork.Save();
+            await unitOfWork.SaveAsync();
             return RedirectToAction(nameof(Index));
         }
         protected override void Dispose(bool disposing)

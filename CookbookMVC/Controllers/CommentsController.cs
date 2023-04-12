@@ -72,7 +72,7 @@ namespace CookbookMVC.Controllers
                 try
                 {
                     unitOfWork.CommentRepository.Update(comment);
-                    unitOfWork.Save();
+                    await unitOfWork.SaveAsync();
                 }
                 catch (DataException)
                 {
@@ -95,7 +95,7 @@ namespace CookbookMVC.Controllers
         {
             Comment comment = unitOfWork.CommentRepository.GetByID(id);
             unitOfWork.CommentRepository.Delete(id);
-            unitOfWork.Save();
+            await unitOfWork.SaveAsync();
             return RedirectToAction(nameof(Index));
         }
 

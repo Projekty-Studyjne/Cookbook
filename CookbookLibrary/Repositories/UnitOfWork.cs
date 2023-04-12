@@ -161,5 +161,10 @@ namespace CookbookLibrary.Repositories
             Dispose(true);
             GC.SuppressFinalize(this);
         }
+
+        public async Task SaveAsync()
+        {
+            await context.SaveChangesAsync();
+        }
     }
 }

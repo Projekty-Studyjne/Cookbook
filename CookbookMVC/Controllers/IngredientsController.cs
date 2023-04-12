@@ -46,7 +46,7 @@ namespace CookbookMVC.Controllers
             if (ModelState.IsValid)
             {
                 unitOfWork.IngredientRepository.Insert(ingredient);
-                unitOfWork.Save();
+                await unitOfWork.SaveAsync();
                 return RedirectToAction(nameof(Index));
             }
             return View(ingredient);
@@ -72,7 +72,7 @@ namespace CookbookMVC.Controllers
                 try
                 {
                     unitOfWork.IngredientRepository.Update(ingredient);
-                    unitOfWork.Save();
+                    await unitOfWork.SaveAsync();
                 }
                 catch (DataException)
                 {
@@ -96,7 +96,7 @@ namespace CookbookMVC.Controllers
         {
             Ingredient ingredient = unitOfWork.IngredientRepository.GetByID(id);
             unitOfWork.IngredientRepository.Delete(id);
-            unitOfWork.Save();
+            await unitOfWork.SaveAsync();
             return RedirectToAction(nameof(Index));
         }
 

@@ -23,6 +23,8 @@ namespace CookbookLibrary.RepositoryInterfaces
         public void Save();
         public void Dispose(bool disposing);
         public void Dispose();
+
+        Task SaveAsync();
     }
   
 }

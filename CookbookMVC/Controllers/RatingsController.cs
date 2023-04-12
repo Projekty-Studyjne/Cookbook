@@ -45,8 +45,8 @@ namespace CookbookMVC.Controllers
         {
             if (ModelState.IsValid)
             {
-                unitOfWork.RatingRepository.Insert(rating); 
-                unitOfWork.Save();
+                unitOfWork.RatingRepository.Insert(rating);
+                await unitOfWork.SaveAsync();
                 return RedirectToAction(nameof(Index));
             }
             return View(rating);
@@ -72,7 +72,7 @@ namespace CookbookMVC.Controllers
                 try
                 {
                     unitOfWork.RatingRepository.Update(rating);
-                    unitOfWork.Save();
+                    await unitOfWork.SaveAsync();
                 }
                 catch (DataException)
                 {
@@ -95,7 +95,7 @@ namespace CookbookMVC.Controllers
         {
             Rating rating = unitOfWork.RatingRepository.GetByID(id);
             unitOfWork.RatingRepository.Delete(id);
-            unitOfWork.Save();
+            await unitOfWork.SaveAsync();
             return RedirectToAction(nameof(Index));
         }
 

@@ -73,7 +73,7 @@ namespace CookbookMVC.Controllers
                 try
                 {
                     unitOfWork.CategoryRepository.Update(category);
-                    unitOfWork.Save();
+                    await unitOfWork.SaveAsync();
                 }
                 catch (DataException)
                 {
@@ -97,7 +97,7 @@ namespace CookbookMVC.Controllers
         {
             Category category = unitOfWork.CategoryRepository.GetByID(id);
             unitOfWork.CategoryRepository.Delete(id);
-            unitOfWork.Save();
+            await unitOfWork.SaveAsync();
             return RedirectToAction(nameof(Index));
         }
 
