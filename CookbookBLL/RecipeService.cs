@@ -24,8 +24,8 @@ namespace CookbookBLL
 
         public async Task<IEnumerable<Recipe>> GetAll()
         {
-            var recipes = _unitOfWork.RecipeRepository.Get(includeProperties: "IngredientRecipes,UserRecipes,CategoryRecipes,Ratings");
-            return await Task.FromResult(recipes);
+            var recipes = await _unitOfWork.RecipeRepository.GetAsync(includeProperties: "IngredientRecipes,UserRecipes,CategoryRecipes,Ratings");
+            return recipes;
         }
 
         public async Task<Recipe> GetRecipeById(int recipeId)
@@ -52,8 +52,8 @@ namespace CookbookBLL
         {
             try
             {
-                var workRepos = _unitOfWork.RecipeRepository;
-                workRepos.Insert(recipe);
+                var recipeRepos = _unitOfWork.RecipeRepository;
+                recipeRepos.Insert(recipe);
                 _unitOfWork.Save();
             }
             catch (Exception e)
@@ -67,8 +67,8 @@ namespace CookbookBLL
         {
             try
             {
-                var workRepos = _unitOfWork.RecipeRepository;
-                workRepos.Delete(recipeId);
+                var recipeRepos = _unitOfWork.RecipeRepository;
+                recipeRepos.Delete(recipeId);
                 await _unitOfWork.SaveAsync();
 
             }
@@ -78,5 +78,24 @@ namespace CookbookBLL
                 throw;
             }
         }
+
+        public async Task<IEnumerable<Recipe>> GetRecipesByIngredient(int ingredientId)
+        {
+            try
+            {
+                var recipes = await _unitOfWork.RecipeRepository
+                    .GetAsync(r => r.IngredientRecipes.Any(i => i.ingredientId == ingredientId),
+                        includeProperties: "Ingredients");
+
+                return recipes;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("An errror occured while getting recipes");
+                throw;
+            }
+        }
+
+
     }
 }

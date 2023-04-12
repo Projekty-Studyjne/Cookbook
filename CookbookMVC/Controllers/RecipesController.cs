@@ -22,9 +22,9 @@ namespace CookbookMVC.Controllers
             unitOfWork = _unitOfWork;
         }
 
-        public ViewResult Index()
+        public async Task<ViewResult> Index()
         {
-            var recipe = unitOfWork.RecipeRepository.Get(includeProperties: "IngredientRecipes,UserRecipes,CategoryRecipes,Ratings");
+            var recipe = await unitOfWork.RecipeRepository.GetAsync(includeProperties: "IngredientRecipes,UserRecipes,CategoryRecipes,Ratings");
             return View(recipe.ToList());
         }
 

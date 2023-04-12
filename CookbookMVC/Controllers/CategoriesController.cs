@@ -23,9 +23,9 @@ namespace CookbookMVC.Controllers
             unitOfWork = _unitOfWork;
         }
 
-        public ViewResult Index()
+        public async Task <ViewResult> Index()
         {
-            var category = unitOfWork.CategoryRepository.Get(includeProperties: "CategoryRecipes");
+            var category = await unitOfWork.CategoryRepository.GetAsync(includeProperties: "CategoryRecipes");
             return View(category.ToList());
         }
 

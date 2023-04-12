@@ -9,7 +9,7 @@ namespace CookbookLibrary.RepositoryInterfaces
 {
     public interface IGenericRepository<TEntity> where TEntity : class
     {
-        public IEnumerable<TEntity> Get(
+        Task<IEnumerable<TEntity>> GetAsync(
             Expression<Func<TEntity, bool>> filter = null,
             Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null,
             string includeProperties = "");
