@@ -5,7 +5,9 @@ VisualStudioVersion = 17.3.32929.385
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CookbookLibrary", "CookbookLibrary\CookbookLibrary.csproj", "{EF09F630-0AAB-4148-9257-EEB00A13B1E6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CookbookMVC", "CookbookMVC\CookbookMVC.csproj", "{5EE06BBF-D2B9-49C9-B87F-53F261E9984B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CookbookMVC", "CookbookMVC\CookbookMVC.csproj", "{5EE06BBF-D2B9-49C9-B87F-53F261E9984B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CookbookBLL", "CookbookBLL\CookbookBLL.csproj", "{44E7209A-56B4-4554-875C-4B33D7C3058D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{5EE06BBF-D2B9-49C9-B87F-53F261E9984B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5EE06BBF-D2B9-49C9-B87F-53F261E9984B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5EE06BBF-D2B9-49C9-B87F-53F261E9984B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{44E7209A-56B4-4554-875C-4B33D7C3058D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{44E7209A-56B4-4554-875C-4B33D7C3058D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{44E7209A-56B4-4554-875C-4B33D7C3058D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{44E7209A-56B4-4554-875C-4B33D7C3058D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
