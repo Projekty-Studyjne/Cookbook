@@ -19,7 +19,7 @@ namespace CookbookBLL
 
         public async Task<IEnumerable<Comment>> GetAll()
         {
-            var comment = await _unitOfWork.CommentRepository.GetAsync(includeProperties: "Ratings");
+            var comment = await _unitOfWork.CommentRepository.GetAsync(includeProperties: "Rating");
             return comment;
         }
 

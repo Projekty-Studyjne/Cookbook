@@ -1,4 +1,5 @@
-﻿using CookbookLibrary.Entities;
+﻿using CookbookBLL.Interfaces;
+using CookbookLibrary.Entities;
 using CookbookLibrary.RepositoryInterfaces;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace CookbookBLL
 {
-    public class UserService
+    public class UserService : IUserService
     {
         private readonly IUnitOfWork _unitOfWork;
         public UserService(IUnitOfWork unitOfWork)
