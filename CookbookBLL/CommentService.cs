@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace CookbookBLL
 {
-    internal class CommentService : ICommentService
+    public class CommentService : ICommentService
     {
         private readonly IUnitOfWork _unitOfWork;
         public CommentService(IUnitOfWork unitOfWork)

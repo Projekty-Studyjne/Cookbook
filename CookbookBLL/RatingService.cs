@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace CookbookBLL
 {
-    internal class RatingService : IRatingService
+    public class RatingService : IRatingService
     {
         private readonly IUnitOfWork _unitOfWork;
         public RatingService(IUnitOfWork unitOfWork)

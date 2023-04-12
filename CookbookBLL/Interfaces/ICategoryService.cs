@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace CookbookBLL.Interfaces
 {
-    internal interface ICategoryService
+    public interface ICategoryService
     {
         Task<IEnumerable<Category>> GetAll();
         Task<Category> GetCategoryById(int categoryId);

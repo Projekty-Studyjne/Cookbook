@@ -15,7 +15,7 @@ using CookbookLibrary;
 
 namespace CookbookBLL
 {
-    internal class RecipeService : IRecipeService
+    public class RecipeService : IRecipeService
     {
         private readonly IUnitOfWork _unitOfWork;
         public RecipeService(IUnitOfWork unitOfWork)

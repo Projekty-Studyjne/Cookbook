@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace CookbookBLL
 {
-    internal class UserService
+    public class UserService
     {
         private readonly IUnitOfWork _unitOfWork;
         public UserService(IUnitOfWork unitOfWork)

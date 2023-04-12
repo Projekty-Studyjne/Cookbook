@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace CookbookBLL.Interfaces
 {
-    internal interface ICommentService
+    public interface ICommentService
     {
         Task<IEnumerable<Comment>> GetAll();
         Task<Comment> GetCommentById(int commentId);

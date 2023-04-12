@@ -10,7 +10,7 @@ using CookbookLibrary.RepositoryInterfaces;
 
 namespace CookbookBLL
 {
-    internal class IngredientService : IIngredientService
+    public class IngredientService : IIngredientService
     {
         private readonly IUnitOfWork _unitOfWork;
         public IngredientService(IUnitOfWork unitOfWork)

@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace CookbookBLL
 {
-    internal class CategoryService : ICategoryService
+    public class CategoryService : ICategoryService
     {
         private readonly IUnitOfWork _unitOfWork;
         public CategoryService(IUnitOfWork unitOfWork)

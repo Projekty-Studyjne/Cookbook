@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace CookbookBLL.Interfaces
 {
-    internal interface IUserService
+    public interface IUserService
     {
         Task<IEnumerable<User>> GetAll();
         Task<User> GetUserById(int userId);

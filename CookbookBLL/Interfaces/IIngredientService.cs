@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace CookbookBLL.Interfaces
 {
-    internal interface IIngredientService
+    public interface IIngredientService
     {
         Task<IEnumerable<Ingredient>> GetAll();
         Task<Ingredient> GetIngredientById(int ingredientId);
