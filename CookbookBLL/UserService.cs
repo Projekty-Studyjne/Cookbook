@@ -19,7 +19,7 @@ namespace CookbookBLL
 
         public async Task<IEnumerable<User>> GetAll()
         {
-            var user = await _unitOfWork.UserRepository.GetAsync(includeProperties: "UserRecipes,Recipes,Ratings");
+            var user = await _unitOfWork.UserRepository.GetAsync(includeProperties: "Ratings,UserRecipes");
             return user;
         }
 
