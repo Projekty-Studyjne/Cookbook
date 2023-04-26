@@ -29,6 +29,12 @@ namespace TestProjectBLL
             this.recipeRepository = recipeRepository;
         }
 
+        public TestUnitOfWork(IGenericRepository<Recipe> recipeRepository)
+        {
+            this.recipeRepository = recipeRepository;
+        }
+
+
         public GenericRepository<Category> CategoryRepository
         {
             get
@@ -152,6 +158,7 @@ namespace TestProjectBLL
         }
 
         private bool disposed = false;
+        private IGenericRepository<Recipe> @object;
 
         public virtual void Dispose(bool disposing)
         {
