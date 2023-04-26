@@ -158,7 +158,6 @@ namespace TestProjectBLL
         }
 
         private bool disposed = false;
-        private IGenericRepository<Recipe> @object;
 
         public virtual void Dispose(bool disposing)
         {
