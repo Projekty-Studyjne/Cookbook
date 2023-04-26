@@ -2,6 +2,8 @@
 using CookbookLibrary;
 using CookbookLibrary.Entities;
 using CookbookLibrary.Repositories;
+using CookbookLibrary.RepositoryInterfaces;
+using Moq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,7 +18,7 @@ namespace TestProjectBLL
         public void TestGetRecipesByIngredient()
         {
             CookbookDbContext context = new CookbookDbContext();
-            var recipeRepo = new RecipeRepoFake(context);
+            var recipeRepo = new RecipeRepoFake();
             recipeRepo.Insert(new Recipe { recipeId = 1, title = "Dumplings", description = "Recipe for dumplings", IngredientRecipes = new List<IngredientRecipe> { new IngredientRecipe { ingredientId = 2 } } });
             recipeRepo.Insert(new Recipe { recipeId = 2, title = "Pizza", description = "Recipe for pizza", IngredientRecipes = new List<IngredientRecipe> { new IngredientRecipe { ingredientId = 1 } } });
             recipeRepo.Insert(new Recipe { recipeId = 3, title = "Omelette", description = "Recipe for omelette", IngredientRecipes = new List<IngredientRecipe> { new IngredientRecipe { ingredientId = 2 } } });

@@ -18,7 +18,7 @@ namespace CookbookLibrary.Repositories
         private GenericRepository<Ingredient> ingredientRepository;
         private GenericRepository<IngredientRecipe> ingredientRecipeRepository;
         private GenericRepository<Rating> ratingRepository;
-        private GenericRepository<Recipe> recipeRepository;
+        private IGenericRepository<Recipe> recipeRepository;
         private GenericRepository<User> userRepository;
         private GenericRepository<UserRecipe> userRecipeRepository;
 
@@ -100,7 +100,7 @@ namespace CookbookLibrary.Repositories
             }
         }
 
-        public GenericRepository<Recipe> RecipeRepository
+        public IGenericRepository<Recipe> RecipeRepository
         {
             get
             {

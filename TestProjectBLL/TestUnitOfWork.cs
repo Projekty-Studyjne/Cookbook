@@ -19,12 +19,12 @@ namespace TestProjectBLL
         private GenericRepository<Ingredient> ingredientRepository;
         private GenericRepository<IngredientRecipe> ingredientRecipeRepository;
         private GenericRepository<Rating> ratingRepository;
-        private RecipeRepository recipeRepository;
+        private IGenericRepository<Recipe> recipeRepository;
         private GenericRepository<User> userRepository;
         private GenericRepository<UserRecipe> userRecipeRepository;
 
 
-        public TestUnitOfWork(RecipeRepository? recipeRepository)
+        public TestUnitOfWork(RecipeRepoFake? recipeRepository)
         {
             this.recipeRepository = recipeRepository;
         }
@@ -107,14 +107,14 @@ namespace TestProjectBLL
             }
         }
 
-        public GenericRepository<Recipe> RecipeRepository
+        public IGenericRepository<Recipe> RecipeRepository
         {
             get
             {
 
                 if (this.recipeRepository == null)
                 {
-                    this.recipeRepository = new RecipeRepository(context);
+                    this.recipeRepository = new RecipeRepoFake();
                 }
                 return recipeRepository;
             }

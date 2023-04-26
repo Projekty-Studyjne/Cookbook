@@ -16,7 +16,7 @@ namespace CookbookLibrary.RepositoryInterfaces
         GenericRepository<Ingredient> IngredientRepository { get; }
         GenericRepository<IngredientRecipe> IngredientRecipeRepository { get; }
         GenericRepository<Rating> RatingRepository { get; }
-        GenericRepository<Recipe> RecipeRepository { get; }
+        IGenericRepository<Recipe> RecipeRepository { get; }
         GenericRepository<User> UserRepository { get; }
         GenericRepository<UserRecipe> UserRecipeRepository { get; }
 

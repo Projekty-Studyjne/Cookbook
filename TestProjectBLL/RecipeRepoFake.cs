@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace TestProjectBLL
 {
-    internal class RecipeRepoFake : RecipeRepository
+    internal class RecipeRepoFake : IGenericRepository<Recipe>
     {
         private List<Recipe> recipes = new List<Recipe>();
 
@@ -75,9 +75,6 @@ namespace TestProjectBLL
 
         private bool _disposed = false;
 
-        public RecipeRepoFake(CookbookDbContext context) : base(context)
-        {
-        }
 
         protected virtual void Dispose(bool disposing)
         {
