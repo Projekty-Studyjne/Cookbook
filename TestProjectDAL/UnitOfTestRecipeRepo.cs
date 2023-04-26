@@ -12,16 +12,11 @@ namespace TestProjectDAL
     public class UnitOfTestRecipeRepo
     {
         [Fact]
-        public void TestGetRecipes()
+        public void TestUnitOfWork()
         {
-            //var options = new DbContextOptionsBuilder<CookbookDbContext>().UseMemoryDatabase
-            //var uczelniaContext = new UczelniaContext(options);
-            //StudentRepo studentRepo = new StudentRepo(uczelniaContext);
-
-            //Assert.Empty(studentRepo.GetStudents());
-            //studentRepo.InsertStudent(new Model.Student { StudentId = 1, Nazwisko = "Kowal", Ocena = 3 });
-            //studentRepo.Save();
-            //Assert.Equal(1, studentRepo.GetStudents().Count());
+            var recipeRepo = new RecipeRepoDummy();
+            var unitOfWork = new UnitOfWork();
+            Assert.Same(recipeRepo, unitOfWork.RecipeRepository);
         }
     }
     

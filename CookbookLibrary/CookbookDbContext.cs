@@ -8,6 +8,11 @@ namespace CookbookLibrary
 
     public class CookbookDbContext : DbContext
     {
+        public CookbookDbContext():base() { }
+        public CookbookDbContext(DbContextOptions options) : base(options)
+        {
+        }
+
         public DbSet<Category> Categories { get; set; }
         public DbSet<CategoryRecipe> CategoryRecipes { get; set; }
         public DbSet<Comment> Comments { get; set; }

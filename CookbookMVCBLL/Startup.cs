@@ -25,6 +25,7 @@ namespace CookbookMVC
         {
             services.AddDbContext<CookbookDbContext>(options =>
                 options.UseSqlServer(_configuration.GetConnectionString("DefaultConnection")));
+            services.AddDbContext<CookbookDbContext>(options => options.UseInMemoryDatabase("CookbookTest"));
         }
     }
 }

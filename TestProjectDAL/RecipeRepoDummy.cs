@@ -4,50 +4,40 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace TestProjectDAL
 {
-    internal class RecipeRepoDummy /*: IRecipeRepository*/
+    internal class RecipeRepoDummy : IGenericRepository<Recipe>
     {
-        public IEnumerable<Recipe> GetRecipes()
+        public void Delete(object id)
         {
             throw new NotImplementedException();
         }
 
-        public Recipe GetRecipeById(int id)
+        public void Delete(Recipe entityToDelete)
         {
             throw new NotImplementedException();
         }
 
-        public void InsertRecipe(Recipe recipe)
+        public Task<IEnumerable<Recipe>> GetAsync(Expression<Func<Recipe, bool>> filter = null, Func<IQueryable<Recipe>, IOrderedQueryable<Recipe>> orderBy = null, string includeProperties = "")
         {
             throw new NotImplementedException();
         }
 
-        public void DeleteRecipe(int recipeId)
+        public Recipe GetByID(object id)
         {
             throw new NotImplementedException();
         }
 
-        public void UpdateRecipe(Recipe recipe)
+        public void Insert(Recipe entity)
         {
             throw new NotImplementedException();
         }
 
-        public void Save()
-        {
-            throw new NotImplementedException();
-        }
-
-
-        protected virtual void Dispose(bool disposing)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Dispose()
+        public void Update(Recipe entityToUpdate)
         {
             throw new NotImplementedException();
         }
