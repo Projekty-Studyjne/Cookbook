@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace TestProjectDAL
 {
-    internal class RecipeRepoDummy : IRecipeRepository
+    internal class RecipeRepoDummy /*: IRecipeRepository*/
     {
         public IEnumerable<Recipe> GetRecipes()
         {

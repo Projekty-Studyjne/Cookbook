@@ -4,70 +4,85 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace CookbookLibrary.Repositories
 {
-    public class RecipeRepository : IRecipeRepository, IDisposable
+    public class RecipeRepository : GenericRepository<Recipe>, IRecipeRepository
     {
-        private CookbookDbContext context;
+        internal CookbookDbContext context;
+        internal DbSet<Recipe> dbSet;
 
-        public RecipeRepository(CookbookDbContext context)
+        public RecipeRepository(CookbookDbContext context) : base(context)
         {
-            context = context;
+            this.context = context;
+            this.dbSet = context.Set<Recipe>();
         }
 
-        public IEnumerable<Recipe> GetRecipes()
+        public async Task<IEnumerable<Recipe>> GetAsync(
+            Expression<Func<Recipe, bool>> filter = null,
+            Func<IQueryable<Recipe>, IOrderedQueryable<Recipe>> orderBy = null,
+            string includeProperties = "")
         {
-            return context.Recipes.ToList();
-        }
+            IQueryable<Recipe> query = dbSet;
 
-        public Recipe GetRecipeById(int id)
-        {
-            return context.Recipes.Find(id);
-        }
-
-        public void InsertRecipe(Recipe recipe)
-        {
-            context.Recipes.Add(recipe);
-        }
-
-        public void DeleteRecipe(int recipeId)
-        {
-            Recipe recipe = context.Recipes.Find(recipeId);
-            context.Recipes.Remove(recipe);
-        }
-
-        public void UpdateRecipe(Recipe recipe)
-        {
-            context.Entry(recipe).State = EntityState.Modified;
-        }
-
-        public void Save()
-        {
-            context.SaveChanges();
-        }
-
-        private bool _disposed = false;
-
-        protected virtual void Dispose(bool disposing)
-        {
-            if (!_disposed)
+            if (filter != null)
             {
-                if (disposing)
-                {
-                    context.Dispose();
-                }
-                _disposed = true;
+                query = query.Where(filter);
             }
+
+            foreach (var includeProperty in includeProperties.Split
+                (new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
+            {
+                query = query.Include(includeProperty);
+            }
+
+            if (orderBy != null)
+            {
+                return await orderBy(query).ToListAsync();
+            }
+            else
+            {
+                return await query.ToListAsync();
+            }
+        }
+
+        public virtual Recipe GetByID(object id)
+        {
+            return dbSet.Find(id);
+        }
+
+        public virtual void Insert(Recipe entity)
+        {
+            dbSet.Add(entity);
+        }
+
+        public virtual void Delete(object id)
+        {
+            Recipe entityToDelete = dbSet.Find(id);
+            Delete(entityToDelete);
+        }
+
+        public virtual void Delete(Recipe entityToDelete)
+        {
+            if (context.Entry(entityToDelete).State == EntityState.Detached)
+            {
+                dbSet.Attach(entityToDelete);
+            }
+            dbSet.Remove(entityToDelete);
+        }
+
+        public virtual void Update(Recipe entityToUpdate)
+        {
+            dbSet.Attach(entityToUpdate);
+            context.Entry(entityToUpdate).State = EntityState.Modified;
         }
 
         public void Dispose()
         {
-            Dispose(true);
-            GC.SuppressFinalize(this);
+            throw new NotImplementedException();
         }
     }
-
 }

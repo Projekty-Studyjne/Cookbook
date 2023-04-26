@@ -7,13 +7,7 @@ using System.Threading.Tasks;
 
 namespace CookbookLibrary.RepositoryInterfaces
 {
-    public interface IRecipeRepository : IDisposable
+    public interface IRecipeRepository : IDisposable, IGenericRepository<Recipe>
     {
-        IEnumerable<Recipe> GetRecipes();
-        Recipe GetRecipeById(int recipeId);
-        void InsertRecipe(Recipe recipe);
-        void DeleteRecipe(int recipeId);
-        void UpdateRecipe(Recipe recipe);
-        void Save();
     }
 }

@@ -1,4 +1,5 @@
 ﻿using CookbookBLL;
+using CookbookLibrary;
 using CookbookLibrary.Entities;
 using CookbookLibrary.Repositories;
 using System;
@@ -12,22 +13,24 @@ namespace TestProjectBLL
     public class UnitTestRecipesBLL
     {
         [Fact]
-        public void  TestGetRecipesByIngredient()
+        public void TestGetRecipesByIngredient()
         {
-            var recipeRepo = new RecipeRepoFake();
-            recipeRepo.InsertRecipe(new Recipe { recipeId = 1, title = "Pierogi", description = "Przepis na pierogi", IngredientRecipes = new List<IngredientRecipe> { new IngredientRecipe { ingredientId = 2 } } });
-            recipeRepo.InsertRecipe(new Recipe { recipeId = 2, title = "Pizza", description = "Przepis na pizzę", IngredientRecipes = new List<IngredientRecipe> { new IngredientRecipe { ingredientId = 1 } } });
-            recipeRepo.InsertRecipe(new Recipe { recipeId = 3, title = "Omlet", description = "Przepis na omlet", IngredientRecipes = new List<IngredientRecipe> { new IngredientRecipe { ingredientId = 2 } } });
+            CookbookDbContext context = new CookbookDbContext();
+            var recipeRepo = new RecipeRepoFake(context);
+            recipeRepo.Insert(new Recipe { recipeId = 1, title = "Dumplings", description = "Recipe for dumplings", IngredientRecipes = new List<IngredientRecipe> { new IngredientRecipe { ingredientId = 2 } } });
+            recipeRepo.Insert(new Recipe { recipeId = 2, title = "Pizza", description = "Recipe for pizza", IngredientRecipes = new List<IngredientRecipe> { new IngredientRecipe { ingredientId = 1 } } });
+            recipeRepo.Insert(new Recipe { recipeId = 3, title = "Omelette", description = "Recipe for omelette", IngredientRecipes = new List<IngredientRecipe> { new IngredientRecipe { ingredientId = 2 } } });
 
-            // Tworzenie jednostki pracy i usługi przepisu
-            var unitOfWork = new UnitOfWork();
+            // Creating unit of work and recipe service
+            var unitOfWork = new TestUnitOfWork(recipeRepo);
             var recipeService = new RecipeService(unitOfWork);
 
-            // Wywołanie metody GetRecipesByIngredient() z identyfikatorem składnika równym 2
+            // Calling the GetRecipesByIngredient() method with the ingredient identifier equal to 2
             var result = recipeService.GetRecipesByIngredient(2).Result;
-
-            // Sprawdzenie, czy wynik zawiera dwa przepisy (Pierogi i Omlet)
-            Console.WriteLine(result.Count());
+            Console.WriteLine(result);
+            // Checking if the result contains two recipes (Dumplings and Omelette)
+            //Assert.Equal(2, result.Count());
+            //Console.WriteLine(result.Count());
             Assert.Contains(result, r => r.recipeId == 1);
             Assert.Contains(result, r => r.recipeId == 3);
         }

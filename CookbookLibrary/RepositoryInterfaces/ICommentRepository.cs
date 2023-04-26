@@ -7,13 +7,8 @@ using System.Threading.Tasks;
 
 namespace CookbookLibrary.RepositoryInterfaces
 {
-    public interface ICommentRepository : IDisposable
+    public interface ICommentRepository : IDisposable, IGenericRepository<Comment>
     {
-        IEnumerable<Comment> GetComments();
-        Comment GetCommentById(int commentId);
-        void InsertComment(Comment comment);
-        void DeleteComment(int commentId);
-        void UpdateComment(Comment comment);
-        void Save();
+
     }
 }
