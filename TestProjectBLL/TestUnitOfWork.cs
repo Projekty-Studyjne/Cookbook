@@ -29,6 +29,12 @@ namespace TestProjectBLL
             this.recipeRepository = recipeRepository;
         }
 
+        public TestUnitOfWork(IGenericRepository<Recipe> recipeRepository)
+        {
+            this.recipeRepository = recipeRepository;
+        }
+
+
         public GenericRepository<Category> CategoryRepository
         {
             get
