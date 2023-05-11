@@ -94,5 +94,17 @@ namespace CookbookMVCBLL.Controllers
             service.Delete(id);
             return RedirectToAction(nameof(Index));
         }
+
+        public async Task<IActionResult> RecipesByIngredient(int ingredientId)
+        {
+            var recipes = await service.GetRecipesByIngredient(ingredientId);
+
+            return View(recipes);
+        }
+        public async Task<IActionResult> RecipeByCategory(int categoryId)
+        {
+            var recipe = await service.GetRecipesByCategory(categoryId);
+            return View(recipe);
+        }
     }
 }

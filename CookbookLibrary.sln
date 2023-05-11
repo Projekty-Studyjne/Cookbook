@@ -11,9 +11,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CookbookBLL", "CookbookBLL\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CookbookMVCBLL", "CookbookMVCBLL\CookbookMVCBLL.csproj", "{E354C454-F5C2-41E5-91F9-75D7FECAFB8F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestProjectDAL", "TestProjectDAL\TestProjectDAL.csproj", "{9A90D15E-8E05-4766-AB57-7A5BD7BEB35E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestProjectDAL", "TestProjectDAL\TestProjectDAL.csproj", "{9A90D15E-8E05-4766-AB57-7A5BD7BEB35E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestProjectBLL", "TestProjectBLL\TestProjectBLL.csproj", "{4AAA0B99-9634-4795-994E-35232326B2A8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestProjectBLL", "TestProjectBLL\TestProjectBLL.csproj", "{4AAA0B99-9634-4795-994E-35232326B2A8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestControlersMVC", "TestControlersMVC\TestControlersMVC.csproj", "{80C8A4ED-6538-4817-A638-184B21995C8D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +47,10 @@ Global
 		{4AAA0B99-9634-4795-994E-35232326B2A8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4AAA0B99-9634-4795-994E-35232326B2A8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4AAA0B99-9634-4795-994E-35232326B2A8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{80C8A4ED-6538-4817-A638-184B21995C8D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{80C8A4ED-6538-4817-A638-184B21995C8D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{80C8A4ED-6538-4817-A638-184B21995C8D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{80C8A4ED-6538-4817-A638-184B21995C8D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

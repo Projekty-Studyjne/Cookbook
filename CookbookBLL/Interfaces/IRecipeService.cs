@@ -10,5 +10,7 @@ namespace CookbookBLL.Interfaces
         Task Add(Recipe recipe);
         Task Delete(int recipeId);
         Task<IEnumerable<Recipe>> GetRecipesByIngredient(int ingredientId);
+        Task<IEnumerable<Recipe>> GetRecipesByCategory(int categoryId);
+        Task AddCategoryToRecipe(int recipeId, Category category);
     }
 }
