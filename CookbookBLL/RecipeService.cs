@@ -127,7 +127,7 @@ namespace CookbookBLL
 
                 var existingCategoryRecipe = recipe.CategoryRecipes
                                                    .SingleOrDefault(cr => cr.categoryId == category.categoryId);
-                if (existingCategoryRecipe != null)
+                if (existingCategoryRecipe != null) 
                 {
                     throw new Exception("Category already assigned to recipe");
                 }

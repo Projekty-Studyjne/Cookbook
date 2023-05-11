@@ -1,8 +1,10 @@
 ﻿using CookbookBLL.Interfaces;
 using CookbookLibrary.Entities;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -15,9 +17,10 @@ namespace TestControlersMVC
             throw new NotImplementedException();
         }
 
-        public Task AddCategoryToRecipe(int recipeId, Category category)
+        public bool isWorking { get; set; }
+        public async Task AddCategoryToRecipe(int recipeId, Category category)
         {
-            throw new NotImplementedException();
+            isWorking = true;
         }
 
         public Task Delete(int recipeId)
