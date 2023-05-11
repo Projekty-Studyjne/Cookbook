@@ -9,7 +9,7 @@ using CookbookLibrary.Repositories;
 
 namespace TestProjectDAL
 {
-    public class UnitOfTestRecipeRepo
+    public class UnitTestUnitOfWork
     {
         [Fact]
         public void TestUnitOfWork()

@@ -13,15 +13,15 @@ namespace TestProjectBLL
     internal class TestUnitOfWork : IUnitOfWork
     {
         private CookbookDbContext context = new CookbookDbContext();
-        private GenericRepository<Category> categoryRepository;
-        private GenericRepository<CategoryRecipe> categoryRecipeRepository;
-        private GenericRepository<Comment> commentRepository;
-        private GenericRepository<Ingredient> ingredientRepository;
-        private GenericRepository<IngredientRecipe> ingredientRecipeRepository;
-        private GenericRepository<Rating> ratingRepository;
+        private IGenericRepository<Category> categoryRepository;
+        private IGenericRepository<CategoryRecipe> categoryRecipeRepository;
+        private IGenericRepository<Comment> commentRepository;
+        private IGenericRepository<Ingredient> ingredientRepository;
+        private IGenericRepository<IngredientRecipe> ingredientRecipeRepository;
+        private IGenericRepository<Rating> ratingRepository;
         private IGenericRepository<Recipe> recipeRepository;
-        private GenericRepository<User> userRepository;
-        private GenericRepository<UserRecipe> userRecipeRepository;
+        private IGenericRepository<User> userRepository;
+        private IGenericRepository<UserRecipe> userRecipeRepository;
 
 
         public TestUnitOfWork(RecipeRepoFake? recipeRepository)
@@ -35,7 +35,7 @@ namespace TestProjectBLL
         }
 
 
-        public GenericRepository<Category> CategoryRepository
+        public IGenericRepository<Category> CategoryRepository
         {
             get
             {
@@ -48,7 +48,7 @@ namespace TestProjectBLL
             }
         }
 
-        public GenericRepository<CategoryRecipe> CategoryRecipeRepository
+        public IGenericRepository<CategoryRecipe> CategoryRecipeRepository
         {
             get
             {
@@ -61,7 +61,7 @@ namespace TestProjectBLL
             }
         }
 
-        public GenericRepository<Comment> CommentRepository
+        public IGenericRepository<Comment> CommentRepository
         {
             get
             {
@@ -74,7 +74,7 @@ namespace TestProjectBLL
             }
         }
 
-        public GenericRepository<Ingredient> IngredientRepository
+        public IGenericRepository<Ingredient> IngredientRepository
         {
             get
             {
@@ -87,7 +87,7 @@ namespace TestProjectBLL
             }
         }
 
-        public GenericRepository<IngredientRecipe> IngredientRecipeRepository
+        public IGenericRepository<IngredientRecipe> IngredientRecipeRepository
         {
             get
             {
@@ -100,7 +100,7 @@ namespace TestProjectBLL
             }
         }
 
-        public GenericRepository<Rating> RatingRepository
+        public IGenericRepository<Rating> RatingRepository
         {
             get
             {
@@ -126,7 +126,7 @@ namespace TestProjectBLL
             }
         }
 
-        public GenericRepository<User> UserRepository
+        public IGenericRepository<User> UserRepository
         {
             get
             {
@@ -139,7 +139,7 @@ namespace TestProjectBLL
             }
         }
 
-        public GenericRepository<UserRecipe> UserRecipeRepository
+        public IGenericRepository<UserRecipe> UserRecipeRepository
         {
             get
             {

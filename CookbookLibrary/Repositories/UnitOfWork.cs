@@ -12,17 +12,17 @@ namespace CookbookLibrary.Repositories
     public class UnitOfWork : IUnitOfWork, IDisposable
     {
         private CookbookDbContext context = new CookbookDbContext();
-        private GenericRepository<Category> categoryRepository;
-        private GenericRepository<CategoryRecipe> categoryRecipeRepository;
-        private GenericRepository<Comment> commentRepository;
-        private GenericRepository<Ingredient> ingredientRepository;
-        private GenericRepository<IngredientRecipe> ingredientRecipeRepository;
-        private GenericRepository<Rating> ratingRepository;
+        private IGenericRepository<Category> categoryRepository;
+        private IGenericRepository<CategoryRecipe> categoryRecipeRepository;
+        private IGenericRepository<Comment> commentRepository;
+        private IGenericRepository<Ingredient> ingredientRepository;
+        private IGenericRepository<IngredientRecipe> ingredientRecipeRepository;
+        private IGenericRepository<Rating> ratingRepository;
         private IGenericRepository<Recipe> recipeRepository;
-        private GenericRepository<User> userRepository;
-        private GenericRepository<UserRecipe> userRecipeRepository;
+        private IGenericRepository<User> userRepository;
+        private IGenericRepository<UserRecipe> userRecipeRepository;
 
-        public GenericRepository<Category> CategoryRepository
+        public IGenericRepository<Category> CategoryRepository
         {
             get
             {
@@ -35,7 +35,7 @@ namespace CookbookLibrary.Repositories
             }
         }
 
-        public GenericRepository<CategoryRecipe> CategoryRecipeRepository
+        public IGenericRepository<CategoryRecipe> CategoryRecipeRepository
         {
             get
             {
@@ -48,7 +48,7 @@ namespace CookbookLibrary.Repositories
             }
         }
 
-        public GenericRepository<Comment> CommentRepository
+        public IGenericRepository<Comment> CommentRepository
         {
             get
             {
@@ -61,7 +61,7 @@ namespace CookbookLibrary.Repositories
             }
         }
 
-        public GenericRepository<Ingredient> IngredientRepository
+        public IGenericRepository<Ingredient> IngredientRepository
         {
             get
             {
@@ -74,7 +74,7 @@ namespace CookbookLibrary.Repositories
             }
         }
 
-        public GenericRepository<IngredientRecipe> IngredientRecipeRepository
+        public IGenericRepository<IngredientRecipe> IngredientRecipeRepository
         {
             get
             {
@@ -87,7 +87,7 @@ namespace CookbookLibrary.Repositories
             }
         }
 
-        public GenericRepository<Rating> RatingRepository
+        public IGenericRepository<Rating> RatingRepository
         {
             get
             {
@@ -112,7 +112,7 @@ namespace CookbookLibrary.Repositories
                 return recipeRepository;
             }
         }
-        public GenericRepository<User> UserRepository
+        public IGenericRepository<User> UserRepository
         {
             get
             {
@@ -125,7 +125,7 @@ namespace CookbookLibrary.Repositories
             }
         }
 
-        public GenericRepository<UserRecipe> UserRecipeRepository
+        public IGenericRepository<UserRecipe> UserRecipeRepository
         {
             get
             {

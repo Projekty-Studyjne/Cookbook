@@ -10,15 +10,15 @@ namespace CookbookLibrary.RepositoryInterfaces
 {
     public interface IUnitOfWork : IDisposable
     {
-        GenericRepository<Category> CategoryRepository { get; }
-        GenericRepository<CategoryRecipe> CategoryRecipeRepository { get; }
-        GenericRepository<Comment> CommentRepository { get; }
-        GenericRepository<Ingredient> IngredientRepository { get; }
-        GenericRepository<IngredientRecipe> IngredientRecipeRepository { get; }
-        GenericRepository<Rating> RatingRepository { get; }
+        IGenericRepository<Category> CategoryRepository { get; }
+        IGenericRepository<CategoryRecipe> CategoryRecipeRepository { get; }
+        IGenericRepository<Comment> CommentRepository { get; }
+        IGenericRepository<Ingredient> IngredientRepository { get; }
+        IGenericRepository<IngredientRecipe> IngredientRecipeRepository { get; }
+        IGenericRepository<Rating> RatingRepository { get; }
         IGenericRepository<Recipe> RecipeRepository { get; }
-        GenericRepository<User> UserRepository { get; }
-        GenericRepository<UserRecipe> UserRecipeRepository { get; }
+        IGenericRepository<User> UserRepository { get; }
+        IGenericRepository<UserRecipe> UserRecipeRepository { get; }
 
         public void Save();
         public void Dispose(bool disposing);
