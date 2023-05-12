@@ -2,11 +2,20 @@ using CookbookBLL.Interfaces;
 using CookbookBLL;
 using CookbookLibrary.Repositories;
 using CookbookLibrary.RepositoryInterfaces;
+using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+builder.Services.AddScoped<ICategoryService, CategoryService>();
+builder.Services.AddScoped<ICommentService, CommentService>();
+builder.Services.AddScoped<IIngredientService, IngredientService>();
+builder.Services.AddScoped<IRatingService, RatingService>();
 builder.Services.AddScoped<IRecipeService, RecipeService>();
+builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddControllers().AddJsonOptions(x =>
+                x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
+
 // Add services to the container.
 
 builder.Services.AddControllers();
@@ -27,6 +36,7 @@ app.UseHttpsRedirection();
 
 app.UseAuthorization();
 app.UseCors(x => x.AllowAnyHeader().AllowAnyOrigin().AllowAnyMethod());
+
 app.MapControllers();
 
 app.Run();
