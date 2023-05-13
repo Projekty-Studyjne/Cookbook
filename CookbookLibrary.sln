@@ -17,7 +17,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestProjectBLL", "TestProje
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestControlersMVC", "TestControlersMVC\TestControlersMVC.csproj", "{80C8A4ED-6538-4817-A638-184B21995C8D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CookbookWebApi", "CookbookWebApi\CookbookWebApi.csproj", "{3F497822-16B4-4012-9ABD-A3D3740F974A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CookbookWebApi", "CookbookWebApi\CookbookWebApi.csproj", "{3F497822-16B4-4012-9ABD-A3D3740F974A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
