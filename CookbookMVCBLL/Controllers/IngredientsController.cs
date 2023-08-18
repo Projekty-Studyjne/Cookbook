@@ -44,11 +44,8 @@ namespace CookbookMVCBLL.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("ingredientId,name,category")] Ingredient ingredient)
         {
-            if (ModelState.IsValid)
-            {
                 service.Add(ingredient);
                 return RedirectToAction(nameof(Index));
-            }
             return View(ingredient);
         }
 
@@ -67,8 +64,6 @@ namespace CookbookMVCBLL.Controllers
                 return NotFound();
             }
 
-            if (ModelState.IsValid)
-            {
                 try
                 {
                     service.Update(ingredient);
@@ -79,13 +74,13 @@ namespace CookbookMVCBLL.Controllers
                     ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists, see your system administrator.");
                 }
                 return RedirectToAction(nameof(Index));
-            }
             return View(ingredient);
         }
 
         public async Task<IActionResult> Delete(int id)
         {
             Ingredient ingredient = await service.GetIngredientById(id);
+            await service.Delete(ingredient.ingredientId);
             return View(ingredient);
         }
 
