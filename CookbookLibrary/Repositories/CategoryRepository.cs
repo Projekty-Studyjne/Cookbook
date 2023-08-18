@@ -41,7 +41,7 @@ namespace CookbookLibrary.Repositories
 
         public void UpdateCategory(Category category)
         {
-            context.Entry(category).State = EntityState.Modified;
+            context.Categories.Update(category);
         }
 
         public void Save()

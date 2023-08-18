@@ -12,6 +12,8 @@ using System.Data;
 using CookbookLibrary.RepositoryInterfaces;
 using System.Xml;
 using CookbookBLL.Interfaces;
+using System.Diagnostics;
+using NuGet.Protocol;
 
 namespace CookbookMVC.Controllers
 {
@@ -45,11 +47,8 @@ namespace CookbookMVC.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("categoryId,name,description")] Category category)
         {
-            if (ModelState.IsValid)
-            {
                 service.Add(category);
                 return RedirectToAction(nameof(Index));
-            }
             return View(category);
         }
 
@@ -61,15 +60,12 @@ namespace CookbookMVC.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("categoryId,name,description")] Category category)
+        public async Task<IActionResult> Edit(int id,Category category)
         {
             if (id != category.categoryId)
             {
                 return NotFound();
             }
-
-            if (ModelState.IsValid)
-            {
                 try
                 {
                     service.Update(category);
@@ -79,14 +75,13 @@ namespace CookbookMVC.Controllers
                     ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists, see your system administrator.");
                 }
                 return RedirectToAction(nameof(Index));
-            }
             return View(category);
         }
 
         public async Task<IActionResult> Delete(int id)
         {
-
             Category category = await service.GetCategoryById(id);
+            await service.Delete(category.categoryId);
             return View(category);
         }
 

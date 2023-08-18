@@ -16,12 +16,12 @@ namespace CookbookLibrary.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "7.0.4")
+                .HasAnnotation("ProductVersion", "7.0.5")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("CookbookLibrary.Category", b =>
+            modelBuilder.Entity("CookbookLibrary.Entities.Category", b =>
                 {
                     b.Property<int>("categoryId")
                         .ValueGeneratedOnAdd()
@@ -64,7 +64,7 @@ namespace CookbookLibrary.Migrations
                         });
                 });
 
-            modelBuilder.Entity("CookbookLibrary.CategoryRecipe", b =>
+            modelBuilder.Entity("CookbookLibrary.Entities.CategoryRecipe", b =>
                 {
                     b.Property<int>("categoryId")
                         .HasColumnType("int");
@@ -96,7 +96,7 @@ namespace CookbookLibrary.Migrations
                         });
                 });
 
-            modelBuilder.Entity("CookbookLibrary.Comment", b =>
+            modelBuilder.Entity("CookbookLibrary.Entities.Comment", b =>
                 {
                     b.Property<int>("commentId")
                         .ValueGeneratedOnAdd()
@@ -137,7 +137,7 @@ namespace CookbookLibrary.Migrations
                         });
                 });
 
-            modelBuilder.Entity("CookbookLibrary.Ingredient", b =>
+            modelBuilder.Entity("CookbookLibrary.Entities.Ingredient", b =>
                 {
                     b.Property<int>("ingredientId")
                         .ValueGeneratedOnAdd()
@@ -180,7 +180,7 @@ namespace CookbookLibrary.Migrations
                         });
                 });
 
-            modelBuilder.Entity("CookbookLibrary.IngredientRecipe", b =>
+            modelBuilder.Entity("CookbookLibrary.Entities.IngredientRecipe", b =>
                 {
                     b.Property<int>("ingredientId")
                         .HasColumnType("int");
@@ -232,7 +232,7 @@ namespace CookbookLibrary.Migrations
                         });
                 });
 
-            modelBuilder.Entity("CookbookLibrary.Rating", b =>
+            modelBuilder.Entity("CookbookLibrary.Entities.Rating", b =>
                 {
                     b.Property<int>("ratingId")
                         .HasColumnType("int");
@@ -278,7 +278,7 @@ namespace CookbookLibrary.Migrations
                         });
                 });
 
-            modelBuilder.Entity("CookbookLibrary.Recipe", b =>
+            modelBuilder.Entity("CookbookLibrary.Entities.Recipe", b =>
                 {
                     b.Property<int>("recipeId")
                         .ValueGeneratedOnAdd()
@@ -341,7 +341,7 @@ namespace CookbookLibrary.Migrations
                         });
                 });
 
-            modelBuilder.Entity("CookbookLibrary.User", b =>
+            modelBuilder.Entity("CookbookLibrary.Entities.User", b =>
                 {
                     b.Property<int>("userId")
                         .ValueGeneratedOnAdd()
@@ -389,7 +389,7 @@ namespace CookbookLibrary.Migrations
                         });
                 });
 
-            modelBuilder.Entity("CookbookLibrary.UserRecipe", b =>
+            modelBuilder.Entity("CookbookLibrary.Entities.UserRecipe", b =>
                 {
                     b.Property<int>("userId")
                         .HasColumnType("int");
@@ -421,18 +421,18 @@ namespace CookbookLibrary.Migrations
                         });
                 });
 
-            modelBuilder.Entity("CookbookLibrary.CategoryRecipe", b =>
+            modelBuilder.Entity("CookbookLibrary.Entities.CategoryRecipe", b =>
                 {
-                    b.HasOne("CookbookLibrary.Category", "Category")
+                    b.HasOne("CookbookLibrary.Entities.Category", "Category")
                         .WithMany("CategoryRecipes")
                         .HasForeignKey("categoryId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("CookbookLibrary.Recipe", "Recipe")
+                    b.HasOne("CookbookLibrary.Entities.Recipe", "Recipe")
                         .WithMany("CategoryRecipes")
                         .HasForeignKey("recipeId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Category");
@@ -440,18 +440,18 @@ namespace CookbookLibrary.Migrations
                     b.Navigation("Recipe");
                 });
 
-            modelBuilder.Entity("CookbookLibrary.IngredientRecipe", b =>
+            modelBuilder.Entity("CookbookLibrary.Entities.IngredientRecipe", b =>
                 {
-                    b.HasOne("CookbookLibrary.Ingredient", "Ingredient")
+                    b.HasOne("CookbookLibrary.Entities.Ingredient", "Ingredient")
                         .WithMany("IngredientRecipes")
                         .HasForeignKey("ingredientId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("CookbookLibrary.Recipe", "Recipe")
+                    b.HasOne("CookbookLibrary.Entities.Recipe", "Recipe")
                         .WithMany("IngredientRecipes")
                         .HasForeignKey("recipeId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Ingredient");
@@ -459,24 +459,24 @@ namespace CookbookLibrary.Migrations
                     b.Navigation("Recipe");
                 });
 
-            modelBuilder.Entity("CookbookLibrary.Rating", b =>
+            modelBuilder.Entity("CookbookLibrary.Entities.Rating", b =>
                 {
-                    b.HasOne("CookbookLibrary.Comment", "Comment")
+                    b.HasOne("CookbookLibrary.Entities.Comment", "Comment")
                         .WithOne("Rating")
-                        .HasForeignKey("CookbookLibrary.Rating", "ratingId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .HasForeignKey("CookbookLibrary.Entities.Rating", "ratingId")
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("CookbookLibrary.Recipe", "Recipe")
+                    b.HasOne("CookbookLibrary.Entities.Recipe", "Recipe")
                         .WithMany("Ratings")
                         .HasForeignKey("recipeId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("CookbookLibrary.User", "User")
+                    b.HasOne("CookbookLibrary.Entities.User", "User")
                         .WithMany("Ratings")
                         .HasForeignKey("userId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Comment");
@@ -486,18 +486,18 @@ namespace CookbookLibrary.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("CookbookLibrary.UserRecipe", b =>
+            modelBuilder.Entity("CookbookLibrary.Entities.UserRecipe", b =>
                 {
-                    b.HasOne("CookbookLibrary.Recipe", "Recipe")
+                    b.HasOne("CookbookLibrary.Entities.Recipe", "Recipe")
                         .WithMany("UserRecipes")
                         .HasForeignKey("recipeId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("CookbookLibrary.User", "User")
+                    b.HasOne("CookbookLibrary.Entities.User", "User")
                         .WithMany("UserRecipes")
                         .HasForeignKey("userId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Recipe");
@@ -505,23 +505,23 @@ namespace CookbookLibrary.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("CookbookLibrary.Category", b =>
+            modelBuilder.Entity("CookbookLibrary.Entities.Category", b =>
                 {
                     b.Navigation("CategoryRecipes");
                 });
 
-            modelBuilder.Entity("CookbookLibrary.Comment", b =>
+            modelBuilder.Entity("CookbookLibrary.Entities.Comment", b =>
                 {
                     b.Navigation("Rating")
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("CookbookLibrary.Ingredient", b =>
+            modelBuilder.Entity("CookbookLibrary.Entities.Ingredient", b =>
                 {
                     b.Navigation("IngredientRecipes");
                 });
 
-            modelBuilder.Entity("CookbookLibrary.Recipe", b =>
+            modelBuilder.Entity("CookbookLibrary.Entities.Recipe", b =>
                 {
                     b.Navigation("CategoryRecipes");
 
@@ -532,7 +532,7 @@ namespace CookbookLibrary.Migrations
                     b.Navigation("UserRecipes");
                 });
 
-            modelBuilder.Entity("CookbookLibrary.User", b =>
+            modelBuilder.Entity("CookbookLibrary.Entities.User", b =>
                 {
                     b.Navigation("Ratings");
 

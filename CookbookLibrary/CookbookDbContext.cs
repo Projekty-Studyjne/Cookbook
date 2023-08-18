@@ -40,63 +40,63 @@ namespace CookbookLibrary
                 .WithMany(c => c.CategoryRecipes)
                 .HasForeignKey(cr => cr.categoryId)
                 .IsRequired()
-                .OnDelete(DeleteBehavior.Restrict);
+                .OnDelete(DeleteBehavior.Cascade);
 
             modelBuilder.Entity<CategoryRecipe>()
                 .HasOne<Recipe>(cr => cr.Recipe)
                 .WithMany(r => r.CategoryRecipes)
                 .HasForeignKey(cr => cr.recipeId)
                 .IsRequired()
-                .OnDelete(DeleteBehavior.Restrict);
+                .OnDelete(DeleteBehavior.Cascade);
 
             modelBuilder.Entity<IngredientRecipe>()
                 .HasOne<Recipe>(ir => ir.Recipe)
                 .WithMany(r => r.IngredientRecipes)
                 .HasForeignKey(ir => ir.recipeId)
                 .IsRequired()
-                .OnDelete(DeleteBehavior.Restrict);
+                .OnDelete(DeleteBehavior.Cascade);
 
             modelBuilder.Entity<IngredientRecipe>()
                 .HasOne<Ingredient>(ir => ir.Ingredient)
                 .WithMany(i => i.IngredientRecipes)
                 .HasForeignKey(ir => ir.ingredientId)
                 .IsRequired()
-                .OnDelete(DeleteBehavior.Restrict);
+                .OnDelete(DeleteBehavior.Cascade);
 
             modelBuilder.Entity<UserRecipe>()
                 .HasOne<Recipe>(ur => ur.Recipe)
                 .WithMany(r => r.UserRecipes)
                 .HasForeignKey(ur => ur.recipeId)
                 .IsRequired()
-                .OnDelete(DeleteBehavior.Restrict);
+                .OnDelete(DeleteBehavior.Cascade);
 
             modelBuilder.Entity<UserRecipe>()
                 .HasOne<User>(ur => ur.User)
                 .WithMany(u => u.UserRecipes)
                 .HasForeignKey(ur => ur.userId)
                 .IsRequired()
-                .OnDelete(DeleteBehavior.Restrict);
+                .OnDelete(DeleteBehavior.Cascade);
 
             modelBuilder.Entity<Rating>()
                 .HasOne(r => r.User)
                 .WithMany(u => u.Ratings)
                 .HasForeignKey(r => r.userId)
                 .IsRequired()
-                .OnDelete(DeleteBehavior.Restrict);
+                .OnDelete(DeleteBehavior.Cascade);
 
             modelBuilder.Entity<Rating>()
                 .HasOne(r => r.Recipe)
                 .WithMany(r => r.Ratings)
                 .HasForeignKey(r => r.recipeId)
                 .IsRequired()
-                .OnDelete(DeleteBehavior.Restrict);
+                .OnDelete(DeleteBehavior.Cascade);
 
             modelBuilder.Entity<Comment>()
                 .HasOne(c => c.Rating)
                 .WithOne(r => r.Comment)
                 .HasForeignKey<Rating>(b => b.ratingId)
                 .IsRequired()
-                .OnDelete(DeleteBehavior.Restrict);
+                .OnDelete(DeleteBehavior.Cascade);
 
             modelBuilder.Entity<Ingredient>().HasData(
                 new Ingredient { ingredientId = 1, name = "Egg", category = "Protein" },

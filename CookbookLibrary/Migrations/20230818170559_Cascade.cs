@@ -7,7 +7,7 @@
 namespace CookbookLibrary.Migrations
 {
     /// <inheritdoc />
-    public partial class init : Migration
+    public partial class Cascade : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -101,13 +101,13 @@ namespace CookbookLibrary.Migrations
                         column: x => x.categoryId,
                         principalTable: "Categories",
                         principalColumn: "categoryId",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_CategoryRecipe_Recipes_recipeId",
                         column: x => x.recipeId,
                         principalTable: "Recipes",
                         principalColumn: "recipeId",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -127,13 +127,13 @@ namespace CookbookLibrary.Migrations
                         column: x => x.ingredientId,
                         principalTable: "Ingredients",
                         principalColumn: "ingredientId",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_IngredientRecipe_Recipes_recipeId",
                         column: x => x.recipeId,
                         principalTable: "Recipes",
                         principalColumn: "recipeId",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -153,19 +153,19 @@ namespace CookbookLibrary.Migrations
                         column: x => x.ratingId,
                         principalTable: "Comments",
                         principalColumn: "commentId",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Ratings_Recipes_recipeId",
                         column: x => x.recipeId,
                         principalTable: "Recipes",
                         principalColumn: "recipeId",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Ratings_Users_userId",
                         column: x => x.userId,
                         principalTable: "Users",
                         principalColumn: "userId",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -183,13 +183,13 @@ namespace CookbookLibrary.Migrations
                         column: x => x.recipeId,
                         principalTable: "Recipes",
                         principalColumn: "recipeId",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_UserRecipe_Users_userId",
                         column: x => x.userId,
                         principalTable: "Users",
                         principalColumn: "userId",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.InsertData(
