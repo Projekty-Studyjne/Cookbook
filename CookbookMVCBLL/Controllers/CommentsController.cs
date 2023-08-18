@@ -42,11 +42,9 @@ namespace CookbookMVCBLL.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("commentId,comment,ratingId")] Comment comment)
         {
-            if (ModelState.IsValid)
-            {
+
                 service.Add(comment);
                 return RedirectToAction(nameof(Index));
-            }
             return View(comment);
         }
 
@@ -64,9 +62,6 @@ namespace CookbookMVCBLL.Controllers
             {
                 return NotFound();
             }
-
-            if (ModelState.IsValid)
-            {
                 try
                 {
                     service.Update(comment);
@@ -76,13 +71,13 @@ namespace CookbookMVCBLL.Controllers
                     ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists, see your system administrator.");
                 }
                 return RedirectToAction(nameof(Index));
-            }
             return View(comment);
         }
 
         public async Task<IActionResult> Delete(int id)
         {
             Comment comment = await service.GetCommentById(id);
+            await service.Delete(comment.commentId);
             return View(comment);
         }
 
