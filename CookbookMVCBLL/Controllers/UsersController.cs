@@ -44,11 +44,9 @@ namespace CookbookMVCBLL.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("userId,username,email,password")] User user)
         {
-            if (ModelState.IsValid)
-            {
+
                 service.Add(user);
                 return RedirectToAction(nameof(Index));
-            }
             return View(user);
         }
 
@@ -67,8 +65,6 @@ namespace CookbookMVCBLL.Controllers
                 return NotFound();
             }
 
-            if (ModelState.IsValid)
-            {
                 try
                 {
                     service.Update(user);
@@ -79,7 +75,7 @@ namespace CookbookMVCBLL.Controllers
                 }
 
                 return RedirectToAction(nameof(Index));
-            }
+
             return View(user);
         }
 
@@ -87,6 +83,7 @@ namespace CookbookMVCBLL.Controllers
         {
 
             User user = await service.GetUserById(id);
+            await service.Delete(user.userId);
             return View(user);
         }
 

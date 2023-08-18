@@ -43,11 +43,9 @@ namespace CookbookMVCBLL.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("ratingId,rating,userId,recipeId")] Rating rating)
         {
-            if (ModelState.IsValid)
-            {
+
                 service.Add(rating);
                 return RedirectToAction(nameof(Index));
-            }
             return View(rating);
         }
 
@@ -66,8 +64,6 @@ namespace CookbookMVCBLL.Controllers
                 return NotFound();
             }
 
-            if (ModelState.IsValid)
-            {
                 try
                 {
                     service.Update(rating);
@@ -77,13 +73,14 @@ namespace CookbookMVCBLL.Controllers
                     ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists, see your system administrator.");
                 }
                 return RedirectToAction(nameof(Index));
-            }
+
             return View(rating);
         }
 
         public async Task<IActionResult> Delete(int id)
         {
             Rating rating = await service.GetRatingById(id);
+            await service.Delete(rating.ratingId);
             return View(rating);
         }
 
