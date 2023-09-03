@@ -14,11 +14,12 @@ namespace CookbookWebApi.Controllers
             this._categoryService = categoryService;
         }
         [HttpGet]
-        public IEnumerable<Category> GetAll()
+        public IEnumerable<CategoryResponse> GetAll()
         {
             IEnumerable<Category> categories = new List<Category>();
             categories = _categoryService.GetAll().Result;
             return categories;
+            //return _categoryService.GetAll().Result.Select(x => new CategoryResponse(x.categoryId, x.name, x.description));
         }
 
         [HttpGet("{id}")]
