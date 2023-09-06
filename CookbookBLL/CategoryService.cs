@@ -37,7 +37,7 @@ namespace CookbookBLL
             {
                 var workRepos = _unitOfWork.CategoryRepository;
                 workRepos.Delete(categoryId);
-                await _unitOfWork.SaveAsync();
+                _unitOfWork.Save();
 
             }
             catch (Exception e)
@@ -64,7 +64,7 @@ namespace CookbookBLL
             try
             {
                 _unitOfWork.CategoryRepository.Update(category);
-                await _unitOfWork.SaveAsync();
+                _unitOfWork.Save();
             }
             catch (Exception ex)
             {

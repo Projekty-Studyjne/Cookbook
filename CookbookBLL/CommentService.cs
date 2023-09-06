@@ -34,7 +34,7 @@ namespace CookbookBLL
             try
             {
                 _unitOfWork.CommentRepository.Update(comment);
-                await _unitOfWork.SaveAsync();
+                _unitOfWork.Save();
             }
             catch (Exception ex)
             {
@@ -64,7 +64,7 @@ namespace CookbookBLL
             {
                 var commentRepos = _unitOfWork.CommentRepository;
                 commentRepos.Delete(commentId);
-                await _unitOfWork.SaveAsync();
+                _unitOfWork.Save();
 
             }
             catch (Exception e)

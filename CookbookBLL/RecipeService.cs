@@ -40,7 +40,7 @@ namespace CookbookBLL
             try
             {
                 _unitOfWork.RecipeRepository.Update(recipe);
-                await _unitOfWork.SaveAsync();
+                _unitOfWork.Save();
             }
             catch (Exception ex)
             {
@@ -70,7 +70,7 @@ namespace CookbookBLL
             {
                 var recipeRepos = _unitOfWork.RecipeRepository;
                 recipeRepos.Delete(recipeId);
-                await _unitOfWork.SaveAsync();
+                _unitOfWork.Save();
 
             }
             catch (Exception e)
@@ -134,7 +134,7 @@ namespace CookbookBLL
 
                 var categoryRecipe = new CategoryRecipe { Recipe = recipe, Category = category };
                 _unitOfWork.CategoryRecipeRepository.Insert(categoryRecipe);
-                await _unitOfWork.SaveAsync();
+                _unitOfWork.Save();
         }
 
     }

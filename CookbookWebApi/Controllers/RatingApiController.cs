@@ -14,19 +14,24 @@ namespace CookbookWebApi.Controllers
             this._ratingService = ratingService;
         }
         [HttpGet]
-        public IEnumerable<Rating> GetAll()
+        public IEnumerable<RatingResponse> GetAll()
         {
-            IEnumerable<Rating> ratings = new List<Rating>();
-            ratings = _ratingService.GetAll().Result;
-            return ratings;
+            //IEnumerable<Rating> ratings = new List<Rating>();
+            //ratings = _ratingService.GetAll().Result;
+            //return ratings;
+            return _ratingService.GetAll().Result.Select(x => new RatingResponse(x.ratingId, x.rating, x.userId, x.recipeId));
         }
 
         [HttpGet("{id}")]
-        public Rating GetOne(int id)
+        public RatingResponse GetOne(int id)
         {
             Rating rating = null;
             rating = _ratingService.GetRatingById(id).Result;
-            return rating;
+            if(rating != null)
+            {
+                return new RatingResponse(rating.ratingId, rating.rating, rating.userId, rating.recipeId);
+            }
+            return null;
         }
 
         [HttpDelete("{id}")]
@@ -38,8 +43,12 @@ namespace CookbookWebApi.Controllers
         }
 
         [HttpPost]
-        public bool Post(Rating rating)
+        public bool Post([FromBody]RatingRequest ratingReq)
         {
+            Rating rating = new Rating();
+            rating.rating = ratingReq.rating;
+            rating.userId = ratingReq.userId;
+            rating.recipeId= ratingReq.recipeId;
             if (_ratingService.Add(rating).IsCompletedSuccessfully)
             {
                 return true;
@@ -48,10 +57,17 @@ namespace CookbookWebApi.Controllers
         }
 
         [HttpPut]
-        public bool Put(Rating rating)
+        public bool Put(int id,[FromBody]RatingRequest ratingReq)
         {
-            if (_ratingService.Update(rating).IsCompletedSuccessfully)
-                return true;
+            Rating? rating = _ratingService.GetRatingById(id).Result;
+            if (rating != null)
+            {
+                rating.rating = ratingReq.rating;
+                rating.userId = ratingReq.userId;
+                rating.recipeId = ratingReq.recipeId;
+                if (_ratingService.Update(rating).IsCompletedSuccessfully)
+                    return true;
+            }
             return false;
         }
     }

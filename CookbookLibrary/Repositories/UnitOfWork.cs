@@ -11,7 +11,7 @@ namespace CookbookLibrary.Repositories
 {
     public class UnitOfWork : IUnitOfWork, IDisposable
     {
-        private CookbookDbContext context = new CookbookDbContext();
+        private CookbookDbContext context = null;
         private IGenericRepository<Category> categoryRepository;
         private IGenericRepository<CategoryRecipe> categoryRecipeRepository;
         private IGenericRepository<Comment> commentRepository;
@@ -22,6 +22,10 @@ namespace CookbookLibrary.Repositories
         private IGenericRepository<User> userRepository;
         private IGenericRepository<UserRecipe> userRecipeRepository;
 
+        public UnitOfWork()
+        {
+            this.context = new CookbookDbContext();
+        }
         public IGenericRepository<Category> CategoryRepository
         {
             get

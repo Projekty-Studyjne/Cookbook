@@ -35,7 +35,7 @@ namespace CookbookBLL
             try
             {
                 _unitOfWork.RatingRepository.Update(rating);
-                await _unitOfWork.SaveAsync();
+                _unitOfWork.Save();
             }
             catch (Exception e)
             {
@@ -64,7 +64,7 @@ namespace CookbookBLL
             {
                 var ratingRepos = _unitOfWork.RatingRepository;
                 ratingRepos.Delete(ratingId);
-                await _unitOfWork.SaveAsync();
+                _unitOfWork.Save();
 
             }
             catch (Exception e)

@@ -14,19 +14,24 @@ namespace CookbookWebApi.Controllers
             this._userService = userService;
         }
         [HttpGet]
-        public IEnumerable<User> GetAll()
+        public IEnumerable<UserResponse> GetAll()
         {
-            IEnumerable<User> users = new List<User>();
-            users = _userService.GetAll().Result;
-            return users;
+            //IEnumerable<User> users = new List<User>();
+            //users = _userService.GetAll().Result;
+            //return users;
+            return _userService.GetAll().Result.Select(x => new UserResponse(x.userId, x.username,x.email,x.password));
         }
 
         [HttpGet("{id}")]
-        public User GetOne(int id)
+        public UserResponse GetOne(int id)
         {
             User user = null;
             user = _userService.GetUserById(id).Result;
-            return user;
+            if(user != null)
+            {
+                return new UserResponse(user.userId, user.username, user.email, user.password);
+            }
+            return null;
         }
 
         [HttpDelete("{id}")]
@@ -38,8 +43,12 @@ namespace CookbookWebApi.Controllers
         }
 
         [HttpPost]
-        public bool Post(User user)
+        public bool Post([FromBody]UserRequest userReq)
         {
+            User user= new User();
+            user.username=userReq.username;
+            user.email = userReq.email;
+            user.password=userReq.password;
             if (_userService.Add(user).IsCompletedSuccessfully)
             {
                 return true;
@@ -48,10 +57,17 @@ namespace CookbookWebApi.Controllers
         }
 
         [HttpPut]
-        public bool Put(User user)
+        public bool Put(int id,[FromBody]UserRequest userReq)
         {
-            if (_userService.Update(user).IsCompletedSuccessfully)
-                return true;
+            User? user = _userService.GetUserById(id).Result;
+            if (user != null)
+            {
+                user.username = userReq.username;
+                user.email=userReq.email;
+                user.password = userReq.password;
+                if (_userService.Update(user).IsCompletedSuccessfully)
+                    return true;
+            }
             return false;
         }
 

@@ -16,18 +16,22 @@ namespace CookbookWebApi.Controllers
         [HttpGet]
         public IEnumerable<CategoryResponse> GetAll()
         {
-            IEnumerable<Category> categories = new List<Category>();
-            categories = _categoryService.GetAll().Result;
-            return categories;
-            //return _categoryService.GetAll().Result.Select(x => new CategoryResponse(x.categoryId, x.name, x.description));
+            //IEnumerable<Category> categories = new List<Category>();
+            //categories = _categoryService.GetAll().Result;
+            //return categories;
+            return _categoryService.GetAll().Result.Select(x => new CategoryResponse(x.categoryId, x.name, x.description));
         }
 
         [HttpGet("{id}")]
-        public Category GetOne(int id)
+        public CategoryResponse GetOne(int id)
         {
             Category category = null;
             category = _categoryService.GetCategoryById(id).Result;
-            return category;
+            if (category != null)
+            {
+                return new CategoryResponse(category.categoryId,category.name, category.description);
+            }
+            return null;
         }
 
         [HttpDelete("{id}")]
@@ -39,8 +43,11 @@ namespace CookbookWebApi.Controllers
         }
 
         [HttpPost]
-        public bool Post(Category category)
+        public bool Post([FromBody]CategoryRequest categoryReq)
         {
+            Category category = new Category();
+            category.name = categoryReq.name;
+            category.description = categoryReq.description;
             if (_categoryService.Add(category).IsCompletedSuccessfully)
             {
                 return true;
@@ -49,10 +56,16 @@ namespace CookbookWebApi.Controllers
         }
 
         [HttpPut]
-        public bool Put(Category category)
+        public bool Put(int id, [FromBody]CategoryRequest categoryReq)
         {
-            if (_categoryService.Update(category).IsCompletedSuccessfully)
-                return true;
+            Category? category = _categoryService.GetCategoryById(id).Result;
+            if (category != null)
+            {
+                category.name = categoryReq.name;
+                category.description = categoryReq.description;
+                if (_categoryService.Update(category).IsCompletedSuccessfully)
+                    return true;
+            }
             return false;
         }
     }

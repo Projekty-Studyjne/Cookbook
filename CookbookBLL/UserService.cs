@@ -34,7 +34,7 @@ namespace CookbookBLL
             try
             {
                 _unitOfWork.UserRepository.Update(user);
-                await _unitOfWork.SaveAsync();
+                _unitOfWork.Save();
             }
             catch (Exception ex)
             {
@@ -64,7 +64,7 @@ namespace CookbookBLL
             {
                 var userRepos = _unitOfWork.UserRepository;
                 userRepos.Delete(userId);
-                await _unitOfWork.SaveAsync();
+                _unitOfWork.Save();
 
             }
             catch (Exception e)
