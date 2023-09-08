@@ -15,5 +15,6 @@ namespace CookbookBLL.Interfaces
         Task Update(Ingredient ingredient);
         Task Delete(int ingredientId);
         Task Add(Ingredient ingredient);
+        Task<IEnumerable<Ingredient>> GetIngredientsByRecipe(int categoryId);
     }
 }

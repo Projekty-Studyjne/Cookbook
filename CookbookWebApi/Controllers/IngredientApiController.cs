@@ -1,4 +1,5 @@
-﻿using CookbookBLL.Interfaces;
+﻿using CookbookBLL;
+using CookbookBLL.Interfaces;
 using CookbookLibrary.Entities;
 using Microsoft.AspNetCore.Mvc;
 
@@ -33,6 +34,12 @@ namespace CookbookWebApi.Controllers
                 return new IngredientResponse(ingredient.ingredientId, ingredient.name, ingredient.category);
             }
             return null;
+        }
+
+        [HttpGet("/IngredientApi/ByRecipe/{id}")]
+        public IEnumerable<IngredientResponse> GetIngredientByRecipe(int id)
+        {
+            return _ingredientService.GetIngredientsByRecipe(id).Result.Select(x => new IngredientResponse(x.ingredientId,x.name,x.category));
         }
 
         [HttpDelete("{id}")]

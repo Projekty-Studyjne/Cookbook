@@ -74,5 +74,22 @@ namespace CookbookBLL
                 throw;
             }
         }
+
+        public async Task<IEnumerable<Ingredient>> GetIngredientsByRecipe(int recipeId)
+        {
+            try
+            {
+                var ingredients = await _unitOfWork.IngredientRepository
+                    .GetAsync(r => r.IngredientRecipes.Any(i => i.recipeId == recipeId),
+                        includeProperties: "IngredientRecipes");
+
+                return ingredients;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("An errror occured while getting recipes");
+                throw;
+            }
+        }
     }
 }

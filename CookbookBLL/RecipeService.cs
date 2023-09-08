@@ -102,7 +102,7 @@ namespace CookbookBLL
             {
                 var recipes = await _unitOfWork.RecipeRepository
                     .GetAsync(r => r.CategoryRecipes.Any(i => i.categoryId == categoryId),
-                        includeProperties: "Category");
+                        includeProperties: "CategoryRecipes");
 
                 return recipes;
             }
