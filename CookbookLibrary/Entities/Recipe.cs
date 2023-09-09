@@ -16,6 +16,7 @@ namespace CookbookLibrary.Entities
         [Required]
         [StringLength(50)]
         public string title { get; set; }
+        public string imageUrl { get; set; }
         [StringLength(200)]
         public string description { get; set; }
         [StringLength(1000)]

@@ -118,7 +118,8 @@ namespace CookbookLibrary
                     description = "A classic breakfast dish",
                     instructions = "1. Whisk eggs and milk together in a bowl. 2. Melt butter in a nonstick skillet over medium heat. 3. Pour egg mixture into skillet and cook, stirring occasionally, until eggs are set but still moist, about 3-5 minutes. 4. Season with salt and pepper to taste.",
                     preparation_time = 10,
-                    servings = 2
+                    servings = 2,
+                    imageUrl= "https://www.allrecipes.com/thmb/HcdHiuwiNOIlOISGKGTI0KxhR7E=/750x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/JF_241160_CreamyCottageCheeseScrambled_4x3_12902-619d00dc88594ea9b8ed884a108db16d.jpg"
                 },
                 new Recipe
                 {
@@ -127,7 +128,8 @@ namespace CookbookLibrary
                     description = "A delicious Italian dinner",
                     instructions = "1. Cook spaghetti according to package instructions. 2. Heat oil in a large skillet over medium-high heat. 3. Add ground beef and cook until browned, stirring occasionally. 4. Add onion, carrot, and celery and cook until vegetables are softened. 5. Add garlic and cook until fragrant. 6. Add tomato paste, crushed tomatoes, and beef broth and bring to a simmer. 7. Reduce heat and let simmer until sauce has thickened, about 20-30 minutes. 8. Season with salt and pepper to taste. 9. Serve over spaghetti.",
                     preparation_time = 45,
-                    servings = 4
+                    servings = 4,
+                    imageUrl= "https://www.slimmingeats.com/blog/wp-content/uploads/2010/04/spaghetti-bolognese-36-735x735.jpg"
                 },
                 new Recipe
                 {
@@ -136,7 +138,8 @@ namespace CookbookLibrary
                     description = "A classic American dessert",
                     instructions = "1. Preheat oven to 375°F. 2. Cream together butter, white sugar, and brown sugar until smooth. 3. Beat in eggs one at a time, then stir in vanilla. 4. Dissolve baking soda in hot water and add to batter. 5. Stir in flour, chocolate chips, and nuts. 6. Drop by large spoonfuls onto ungreased pans. 7. Bake for about 10 minutes or until edges are nicely browned.",
                     preparation_time = 30,
-                    servings = 24
+                    servings = 24,
+                    imageUrl= "https://images.aws.nestle.recipes/original/5b069c3ed2feea79377014f6766fcd49_Original_NTH_Chocolate_Chip_Cookie.jpg"
                 }
             );
             modelBuilder.Entity<Category>().HasData(

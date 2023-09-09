@@ -22,7 +22,7 @@ namespace CookbookWebApi.Controllers
             //IEnumerable<Recipe> recipes = new List<Recipe>();
             //recipes = _recipeService.GetAll().Result;
             //return recipes;
-            return _recipeService.GetAll().Result.Select(x => new RecipeResponse(x.recipeId, x.title, x.description, x.instructions, x.preparation_time, x.servings));
+            return _recipeService.GetAll().Result.Select(x => new RecipeResponse(x.recipeId, x.title,x.imageUrl, x.description, x.instructions, x.preparation_time, x.servings));
         }
 
         [HttpGet("{id}")]
@@ -32,7 +32,7 @@ namespace CookbookWebApi.Controllers
             recipe = _recipeService.GetRecipeById(id).Result;
             if (recipe != null)
             {
-                return new RecipeResponse(recipe.recipeId,recipe.title,recipe.description,recipe.instructions,recipe.preparation_time,recipe.servings);
+                return new RecipeResponse(recipe.recipeId,recipe.title,recipe.imageUrl,recipe.description,recipe.instructions,recipe.preparation_time,recipe.servings);
             }
             return null;
         }
@@ -43,7 +43,7 @@ namespace CookbookWebApi.Controllers
             //IEnumerable<Recipe> recipes = new List<Recipe>();
             //recipes = _recipeService.GetRecipesByIngredient(id).Result;
             //return recipes;
-            return _recipeService.GetRecipesByIngredient(id).Result.Select(x => new RecipeResponse(x.recipeId, x.title, x.description, x.instructions, x.preparation_time, x.servings));
+            return _recipeService.GetRecipesByIngredient(id).Result.Select(x => new RecipeResponse(x.recipeId, x.title,x.imageUrl, x.description, x.instructions, x.preparation_time, x.servings));
         }
 
         [HttpGet("/RecipesApi/ByCategory/{id}")]
@@ -52,7 +52,7 @@ namespace CookbookWebApi.Controllers
             //IEnumerable<Recipe> recipes = new List<Recipe>();
             //recipes = _recipeService.GetRecipesByCategory(id).Result;
             //return recipes;
-            return _recipeService.GetRecipesByCategory(id).Result.Select(x => new RecipeResponse(x.recipeId, x.title, x.description, x.instructions, x.preparation_time, x.servings));
+            return _recipeService.GetRecipesByCategory(id).Result.Select(x => new RecipeResponse(x.recipeId, x.title,x.imageUrl, x.description, x.instructions, x.preparation_time, x.servings));
         }
 
         [HttpDelete("{id}")]
