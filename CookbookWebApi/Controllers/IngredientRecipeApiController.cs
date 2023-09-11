@@ -25,11 +25,11 @@ namespace CookbookWebApi.Controllers
         //    return _recipeService.GetAll().Result.Select(x => new RecipeResponse(x.recipeId, x.title, x.description, x.instructions, x.preparation_time, x.servings, x.IngredientRecipes));
         //}
 
-        [HttpGet("{id}")]
-        public IngredientRecipe GetOne(int id)
-        {
-            return _ingredientRecipeService.GetIngredientsByRecipe(id).Result;
-        }
+        //[HttpGet("{id}")]
+        //public IngredientRecipe GetOne(int id)
+        //{
+        //    return _ingredientRecipeService.GetIngredientsByRecipe(id).Result;
+        //}
 
         //[HttpGet("/RecipesApi/ByIngredient/{id}")]
         //public IEnumerable<RecipeResponse> GetRecipeByIngredient(int id)
