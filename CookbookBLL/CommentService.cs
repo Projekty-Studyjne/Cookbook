@@ -29,6 +29,22 @@ namespace CookbookBLL
             return await Task.FromResult(comment);
         }
 
+        public async Task<IEnumerable<Comment>> GetCommentByRating(int ratingId)
+        {
+            try
+            {
+                var comment = await _unitOfWork.CommentRepository
+                    .GetAsync(r => r.Rating.ratingId == ratingId);
+
+                return comment;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("An errror occured while getting recipes");
+                throw;
+            }
+        }
+
         public async Task Update(Comment comment)
         {
             try

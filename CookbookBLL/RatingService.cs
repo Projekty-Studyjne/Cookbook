@@ -29,7 +29,23 @@ namespace CookbookBLL
             var rating = _unitOfWork.RatingRepository.GetByID(ratingId);
             return await Task.FromResult(rating);
         }
-        
+
+        public async Task<IEnumerable<Rating>> GetRatingsByRecipe(int recipeId)
+        {
+            try
+            {
+                var ratings = await _unitOfWork.RatingRepository
+                    .GetAsync(r => r.Recipe.recipeId == recipeId);
+
+                return ratings;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("An errror occured while getting recipes");
+                throw;
+            }
+        }
+
         public async Task Update(Rating rating)
         {
             try

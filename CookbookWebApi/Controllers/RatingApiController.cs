@@ -1,4 +1,5 @@
-﻿using CookbookBLL.Interfaces;
+﻿using CookbookBLL;
+using CookbookBLL.Interfaces;
 using CookbookLibrary.Entities;
 using Microsoft.AspNetCore.Mvc;
 
@@ -32,6 +33,12 @@ namespace CookbookWebApi.Controllers
                 return new RatingResponse(rating.ratingId, rating.rating, rating.userId, rating.recipeId);
             }
             return null;
+        }
+
+        [HttpGet("/RatingsApi/ByRecipe/{recipeId}")]
+        public IEnumerable<RatingResponse> GetRatingsByRecipe(int recipeId)
+        {
+            return _ratingService.GetRatingsByRecipe(recipeId).Result.Select(x => new RatingResponse(x.ratingId, x.rating, x.userId, x.recipeId));
         }
 
         [HttpDelete("{id}")]

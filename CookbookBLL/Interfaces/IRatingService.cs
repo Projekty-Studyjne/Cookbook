@@ -14,5 +14,6 @@ namespace CookbookBLL.Interfaces
         Task Update(Rating rating);
         Task Add(Rating rating);
         Task Delete(int ratingId);
+        Task<IEnumerable<Rating>> GetRatingsByRecipe(int recipeId);
     }
 }
