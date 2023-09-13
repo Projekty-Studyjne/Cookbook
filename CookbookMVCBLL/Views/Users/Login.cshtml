@@ -1,0 +1,51 @@
+﻿@model CookbookLibrary.Entities.User
+@{
+    ViewData["Title"] = "Login";
+}
+<!DOCTYPE html>
+<head>
+    <title>Login</title>
+    <style>
+        body {
+            background-color:white;
+            color: black;
+            font-family: sans-serif;
+        }
+
+        h1 {
+            font-size: 2em;
+            margin-bottom: 1em;
+        }
+        /*.naglowek{
+            background-color: gray;
+            width:100%;
+            height:50px;
+        }*/
+
+    </style>
+</head>
+<body>
+    <div class="naglowek"></div>
+    <h1>Login</h1>
+
+ 
+    <form asp-action="Login" method="post">
+       <div>
+            <label asp-for="username">Username</label>
+            <input asp-for="username" />
+       </div>
+       <div>
+            <label asp-for="password">Password</label>
+            <input asp-for="password" type="password"/>
+        </div>
+        <div>
+            <span class="text-danger">@Html.ValidationMessage("InvalidCredentials")</span>
+        </div>
+        <div>
+            <input type="submit" value="Login" >
+        </div>
+    </form>
+
+    <a href="/Users/Register">Register</a>
+</body>
+</html>

@@ -1,6 +1,8 @@
 ﻿using CookbookBLL.Interfaces;
 using CookbookLibrary.Entities;
 using CookbookLibrary.RepositoryInterfaces;
+using Microsoft.AspNetCore.Http;
+using Microsoft.Data.SqlClient;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -72,6 +74,15 @@ namespace CookbookBLL
                 Console.WriteLine("An error occured while deleting user");
                 throw;
             }
+        }
+
+        public async Task<User> AuthenticateUser(string username, string password)
+        {
+
+            var users = await _unitOfWork.UserRepository.GetAsync(filter: x => x.username == username);
+            var user = users.FirstOrDefault(u => u.password == password);
+
+            return user;
         }
     }
 }

@@ -7,7 +7,7 @@
 namespace CookbookLibrary.Migrations
 {
     /// <inheritdoc />
-    public partial class addImageUrl : Migration
+    public partial class init : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

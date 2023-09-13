@@ -11,6 +11,10 @@ using CookbookLibrary.RepositoryInterfaces;
 using System.Data;
 using CookbookBLL.Interfaces;
 using CookbookBLL;
+using CookbookMVCBLL;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
+using CookbookLibrary.Repositories;
+using Microsoft.CodeAnalysis.FlowAnalysis.DataFlow;
 
 namespace CookbookMVCBLL.Controllers
 {
@@ -22,7 +26,7 @@ namespace CookbookMVCBLL.Controllers
         {
             this.service = service;
         }
-
+        
         public async Task<ViewResult> Index()
         {
             var user = await service.GetAll();
@@ -45,8 +49,8 @@ namespace CookbookMVCBLL.Controllers
         public async Task<IActionResult> Create([Bind("userId,username,email,password")] User user)
         {
 
-                service.Add(user);
-                return RedirectToAction(nameof(Index));
+            service.Add(user);
+            return RedirectToAction(nameof(Index));
             return View(user);
         }
 
@@ -65,23 +69,22 @@ namespace CookbookMVCBLL.Controllers
                 return NotFound();
             }
 
-                try
-                {
-                    service.Update(user);
-                }
-                catch (DataException)
-                {
-                    ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists, see your system administrator.");
-                }
+            try
+            {
+                service.Update(user);
+            }
+            catch (DataException)
+            {
+                ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists, see your system administrator.");
+            }
 
-                return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(Index));
 
             return View(user);
         }
 
         public async Task<IActionResult> Delete(int id)
         {
-
             User user = await service.GetUserById(id);
             await service.Delete(user.userId);
             return View(user);
@@ -95,5 +98,86 @@ namespace CookbookMVCBLL.Controllers
             service.Delete(id);
             return RedirectToAction(nameof(Index));
         }
+      
+        [HttpGet]
+        public IActionResult Login()
+        {
+            return View();
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Login([Bind("username,password")] User user)
+        {
+            var username = Request.Form["username"];
+            var password = Request.Form["password"];
+
+            var authenticatedUser = await service.AuthenticateUser(username, password);
+                
+                
+            if (authenticatedUser != null)
+                {
+                return RedirectToAction("AccountPanel", "Users", new { id = authenticatedUser.userId});
+                }
+                else
+                {
+                    ModelState.AddModelError("InvalidCredentials", "Invalid username or password.");
+                }
+       
+            return View();
+        }
+        
+        public IActionResult Register()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Register([Bind("userId,username,email,password")] User user)
+        {
+
+            service.Add(user);
+            int id = user.userId;
+            return RedirectToAction(nameof(Login));
+            
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> EditAccount(int id)
+        {
+            User user = await service.GetUserById(id);
+            return View(user);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> EditAccount(int id, [Bind("userId,username,email,password")] User user)
+        {
+            if (id != user.userId)
+            {
+                return NotFound();
+            }
+            try
+            {
+                service.Update(user);
+            }
+            catch (DataException)
+            {
+                ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists, see your system administrator.");
+            }
+
+            return RedirectToAction(nameof(AccountPanel));
+            //return RedirectToAction("AccountPanel", "Users", new { id = user.userId });
+
+        }
+
+        [HttpGet]
+        [ActionName("AccountPanel")]
+        public async Task<IActionResult> AccountPanel(int? id)
+        {
+                User user = await service.GetUserById(id.Value);
+                return View(user);
+        }
+
     }
 }

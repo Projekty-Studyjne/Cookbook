@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CookbookLibrary.Migrations
 {
     [DbContext(typeof(CookbookDbContext))]
-    [Migration("20230909111426_addImageUrl")]
-    partial class addImageUrl
+    [Migration("20230909213236_init")]
+    partial class init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
