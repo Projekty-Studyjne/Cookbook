@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 
 namespace CookbookMVC
 {
@@ -19,13 +20,19 @@ namespace CookbookMVC
         }
         public void Configure(IApplicationBuilder app)
         {
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllerRoute(
+                    name: "default",
+                    pattern: "{controller=Home}/{action=Index}/{id?}");
+            });
             // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         }
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<CookbookDbContext>(options =>
                 options.UseSqlServer(_configuration.GetConnectionString("DefaultConnection")));
-            services.AddDbContext<CookbookDbContext>(options => options.UseInMemoryDatabase("CookbookTest"));
+            services.AddDbContext<CookbookDbContext>(options => options.UseInMemoryDatabase("CookbookTest"));           
         }
     }
 }
