@@ -26,7 +26,14 @@ namespace CookbookMVC
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
             });
-            // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
+
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllerRoute(
+                name: "RecipeCreate",
+                pattern: "Recipes/NewRecipe",
+                defaults: new { controller = "Recipes", action = "NewRecipe" });
+            });
         }
         public void ConfigureServices(IServiceCollection services)
         {

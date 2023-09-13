@@ -27,4 +27,15 @@
             @Html.DisplayFor(model => model.password)
         </dd>
     </dl>
+    <div>
+        <div>
+            <a href="http://localhost:4200/LogUser/@Model.userId" class="btn btn-primary">Main Page</a>
+        </div>
+        <div>
+            <a asp-action="EditAccount" asp-route-id="@Model.userId">Edit Account</a>
+        </div>
+        <div>
+            <a asp-controller="Recipes" asp-action="NewRecipe" asp-route-id="@Model.userId">Add your recipe!</a>
+        </div>
+    </div>
 </div>

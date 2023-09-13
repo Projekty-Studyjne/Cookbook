@@ -63,7 +63,6 @@ namespace CookbookMVCBLL.Controllers
             {
                 return NotFound();
             }
-
                 try
                 {
                     service.Update(ingredient);
@@ -91,6 +90,21 @@ namespace CookbookMVCBLL.Controllers
             Ingredient ingredient = await service.GetIngredientById(id);
             service.Delete(id);
             return RedirectToAction(nameof(Index));
+        }
+
+        [HttpGet]
+        public IActionResult NewIngredient()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> NewIngredient([Bind("recipeId,title,description,instructions,preparation_time,servings")] Ingredient ingredient)
+        {
+            service.Add(ingredient);
+            return RedirectToAction(nameof(Index));
+            return View(ingredient);
         }
 
     }

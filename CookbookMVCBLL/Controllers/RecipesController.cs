@@ -92,7 +92,7 @@ namespace CookbookMVCBLL.Controllers
 
         public async Task<IActionResult> RecipesByIngredient(int ingredientId)
         {
-            var recipes = await service.GetRecipesByIngredient(ingredientId);
+            var recipes = await service.GetRecipeById(ingredientId);
 
             return View(recipes);
         }
@@ -106,6 +106,21 @@ namespace CookbookMVCBLL.Controllers
         {
             await service.AddCategoryToRecipe(recipeId, category);
             return View();
+        }
+
+        [HttpGet]
+        public IActionResult NewRecipe()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> NewRecipe([Bind("recipeId,title,description,instructions,preparation_time,servings")] Recipe recipe)
+        {
+            service.Add(recipe);
+            return RedirectToAction("NewIngredients", "Ingredients", new { id = recipe.recipeId});
+            return View(recipe);
         }
     }
 }

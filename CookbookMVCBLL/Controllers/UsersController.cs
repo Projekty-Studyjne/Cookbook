@@ -21,7 +21,7 @@ namespace CookbookMVCBLL.Controllers
     public class UsersController : Controller
     {
         private IUserService service;
-        public int idLoginUser;
+
         public UsersController(IUserService service)
         {
             this.service = service;
@@ -85,7 +85,6 @@ namespace CookbookMVCBLL.Controllers
 
         public async Task<IActionResult> Delete(int id)
         {
-
             User user = await service.GetUserById(id);
             await service.Delete(user.userId);
             return View(user);
@@ -99,11 +98,7 @@ namespace CookbookMVCBLL.Controllers
             service.Delete(id);
             return RedirectToAction(nameof(Index));
         }
-        public IActionResult EditAccount()
-        {
-            return View();
-        }
-
+      
         [HttpGet]
         public IActionResult Login()
         {
@@ -147,7 +142,7 @@ namespace CookbookMVCBLL.Controllers
             
         }
 
-
+        [HttpGet]
         public async Task<IActionResult> EditAccount(int id)
         {
             User user = await service.GetUserById(id);
@@ -171,11 +166,10 @@ namespace CookbookMVCBLL.Controllers
                 ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists, see your system administrator.");
             }
 
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(AccountPanel));
+            //return RedirectToAction("AccountPanel", "Users", new { id = user.userId });
 
-            return View(user);
         }
-
 
         [HttpGet]
         [ActionName("AccountPanel")]
@@ -183,8 +177,6 @@ namespace CookbookMVCBLL.Controllers
         {
                 User user = await service.GetUserById(id.Value);
                 return View(user);
-
-
         }
 
     }
