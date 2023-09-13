@@ -166,16 +166,16 @@ namespace CookbookMVCBLL.Controllers
                 ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists, see your system administrator.");
             }
 
-            return RedirectToAction(nameof(AccountPanel));
-            //return RedirectToAction("AccountPanel", "Users", new { id = user.userId });
+            //return RedirectToAction(nameof(AccountPanel));
+            return RedirectToAction("AccountPanel", "Users", new { id = user.userId });
 
         }
 
         [HttpGet]
         [ActionName("AccountPanel")]
-        public async Task<IActionResult> AccountPanel(int? id)
+        public async Task<IActionResult> AccountPanel(int id)
         {
-                User user = await service.GetUserById(id.Value);
+                User user = await service.GetUserById(id);
                 return View(user);
         }
 

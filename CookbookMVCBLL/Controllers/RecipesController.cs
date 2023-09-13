@@ -122,5 +122,6 @@ namespace CookbookMVCBLL.Controllers
             return RedirectToAction("NewIngredients", "Ingredients", new { id = recipe.recipeId});
             return View(recipe);
         }
+       
     }
 }
