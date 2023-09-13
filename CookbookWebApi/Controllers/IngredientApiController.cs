@@ -2,6 +2,7 @@
 using CookbookBLL.Interfaces;
 using CookbookLibrary.Entities;
 using Microsoft.AspNetCore.Mvc;
+using System.Linq;
 
 namespace CookbookWebApi.Controllers
 {
@@ -21,7 +22,7 @@ namespace CookbookWebApi.Controllers
             //IEnumerable<Ingredient> ingredients = new List<Ingredient>();
             //ingredients = _ingredientService.GetAll().Result;
             //return ingredients;
-            return _ingredientService.GetAll().Result.Select(x => new IngredientResponse(x.ingredientId, x.name, x.category));
+            return _ingredientService.GetAll().Result.Select(x => new IngredientResponse(x.ingredientId, x.name, x.category,null, null));
         }
 
         [HttpGet("{id}")]
@@ -31,7 +32,7 @@ namespace CookbookWebApi.Controllers
             ingredient = _ingredientService.GetIngredientById(id).Result;
             if (ingredient != null)
             {
-                return new IngredientResponse(ingredient.ingredientId, ingredient.name, ingredient.category);
+                return new IngredientResponse(ingredient.ingredientId, ingredient.name, ingredient.category,null, null);
             }
             return null;
         }
@@ -39,7 +40,7 @@ namespace CookbookWebApi.Controllers
         [HttpGet("/IngredientApi/ByRecipe/{id}")]
         public IEnumerable<IngredientResponse> GetIngredientByRecipe(int id)
         {
-            return _ingredientService.GetIngredientsByRecipe(id).Result.Select(x => new IngredientResponse(x.ingredientId,x.name,x.category));
+            return _ingredientService.GetIngredientsByRecipe(id).Result.Select(x => new IngredientResponse(x.ingredientId,x.name,x.category,x.IngredientRecipes.Single(a=>a.ingredientId==x.ingredientId && a.recipeId==id).quantity,x.IngredientRecipes.Single(a => a.ingredientId == x.ingredientId && a.recipeId == id).unit));
         }
 
         [HttpDelete("{id}")]

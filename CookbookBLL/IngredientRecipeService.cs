@@ -24,7 +24,7 @@ namespace CookbookBLL
             return recipes;
         }
 
-        public async Task<IngredientRecipe> GetIngredientsByRecipe(int recipeId)
+        public async Task<IngredientRecipe> GetIngredientRecipeById(int recipeId)
         {
             var ingredients = _unitOfWork.IngredientRecipeRepository.GetByID(recipeId);
             return await Task.FromResult(ingredients);
@@ -74,6 +74,23 @@ namespace CookbookBLL
                 throw;
             }
         }
+
+        //public async Task<IngredientRecipe> GetIngredientRecipeByIngredient(int ingredientId)
+        //{
+        //    try
+        //    {
+        //        var ingredient = await _unitOfWork.IngredientRecipeRepository
+        //            .GetAsync(r => r.IngredientRecipes.Any(i => i.recipeId == recipeId),
+        //                includeProperties: "IngredientRecipes");
+
+        //        return ingredients;
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        Console.WriteLine("An errror occured while getting recipes");
+        //        throw;
+        //    }
+        //}
     }
 }
 

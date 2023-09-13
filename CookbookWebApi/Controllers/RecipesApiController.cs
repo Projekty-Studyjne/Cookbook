@@ -19,9 +19,6 @@ namespace CookbookWebApi.Controllers
         [HttpGet]
         public IEnumerable<RecipeResponse> GetAll()
         {
-            //IEnumerable<Recipe> recipes = new List<Recipe>();
-            //recipes = _recipeService.GetAll().Result;
-            //return recipes;
             return _recipeService.GetAll().Result.Select(x => new RecipeResponse(x.recipeId, x.title,x.imageUrl, x.description, x.instructions, x.preparation_time, x.servings));
         }
 
@@ -37,21 +34,21 @@ namespace CookbookWebApi.Controllers
             return null;
         }
 
-        [HttpGet("/RecipesApi/ByIngredient/{id}")]
-        public IEnumerable<RecipeResponse> GetRecipeByIngredient(int id)
+        [HttpGet("/RecipesApi/ByIngredient/{ingredientName}")]
+        public IEnumerable<RecipeResponse> GetRecipesByIngredientName(string ingredientName)
         {
-            //IEnumerable<Recipe> recipes = new List<Recipe>();
-            //recipes = _recipeService.GetRecipesByIngredient(id).Result;
-            //return recipes;
-            return _recipeService.GetRecipesByIngredient(id).Result.Select(x => new RecipeResponse(x.recipeId, x.title,x.imageUrl, x.description, x.instructions, x.preparation_time, x.servings));
+            return _recipeService.GetRecipesByIngredientName(ingredientName).Result.Select(x => new RecipeResponse(x.recipeId, x.title,x.imageUrl, x.description, x.instructions, x.preparation_time, x.servings));
+        }
+
+        [HttpGet("/RecipesApi/ByName/{name}")]
+        public IEnumerable<RecipeResponse> GetRecipesByName(string name)
+        {
+            return _recipeService.GetRecipesByName(name).Result.Select(x => new RecipeResponse(x.recipeId, x.title, x.imageUrl, x.description, x.instructions, x.preparation_time, x.servings));
         }
 
         [HttpGet("/RecipesApi/ByCategory/{id}")]
         public IEnumerable<RecipeResponse> GetRecipeByCategory(int id)
         {
-            //IEnumerable<Recipe> recipes = new List<Recipe>();
-            //recipes = _recipeService.GetRecipesByCategory(id).Result;
-            //return recipes;
             return _recipeService.GetRecipesByCategory(id).Result.Select(x => new RecipeResponse(x.recipeId, x.title,x.imageUrl, x.description, x.instructions, x.preparation_time, x.servings));
         }
 

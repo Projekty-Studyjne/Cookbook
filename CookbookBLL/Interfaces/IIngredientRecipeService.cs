@@ -10,7 +10,7 @@ namespace CookbookBLL.Interfaces
     public interface IIngredientRecipeService
     {
         Task<IEnumerable<IngredientRecipe>> GetAll();
-        Task<IngredientRecipe> GetIngredientsByRecipe(int ingredientRecipeId);
+        Task<IngredientRecipe> GetIngredientRecipeById(int ingredientRecipeId);
         Task Update(IngredientRecipe ingredientRecipe);
         Task Delete(int ingredientId);
         Task Add(IngredientRecipe ingredientRecipe);
