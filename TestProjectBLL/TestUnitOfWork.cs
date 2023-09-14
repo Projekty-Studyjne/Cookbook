@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace TestProjectBLL
 {
-    internal class TestUnitOfWork : IUnitOfWork
+    public class TestUnitOfWork : IUnitOfWork
     {
         private CookbookDbContext context = new CookbookDbContext();
         private IGenericRepository<Category> categoryRepository;
@@ -24,16 +24,32 @@ namespace TestProjectBLL
         private IGenericRepository<UserRecipe> userRecipeRepository;
 
 
-        public TestUnitOfWork(RecipeRepoFake? recipeRepository)
+        public TestUnitOfWork(RecipeRepoFake? recipeRepoFake, CategoryRecipeRepoFake categoryRecipeRepoFake)
         {
-            this.recipeRepository = recipeRepository;
+            this.recipeRepository = recipeRepoFake;
+            this.categoryRecipeRepository = categoryRecipeRepoFake;
         }
 
-        public TestUnitOfWork(IGenericRepository<Recipe> recipeRepository)
+        public TestUnitOfWork(RecipeRepoFake recipeRepoFake, IngredientRepoFake ingredientRepoFake)
         {
-            this.recipeRepository = recipeRepository;
+            this.recipeRepository = recipeRepoFake;
+            this.ingredientRepository = ingredientRepoFake;
         }
 
+        public TestUnitOfWork(IngredientRepoFake ingredientRepoFake)
+        {
+            this.ingredientRepository = ingredientRepoFake;
+        }
+
+        public TestUnitOfWork(RecipeRepoFake recipeRepoFake)
+        {
+            this.recipeRepository = recipeRepoFake;
+        }
+
+        public TestUnitOfWork(CommentRepoFake commentRepoFake)
+        {
+            this.commentRepository = commentRepoFake;
+        }
 
         public IGenericRepository<Category> CategoryRepository
         {
