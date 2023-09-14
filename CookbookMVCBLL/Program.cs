@@ -12,6 +12,9 @@ builder.Services.AddScoped<IIngredientService, IngredientService>();
 builder.Services.AddScoped<IRatingService, RatingService>();
 builder.Services.AddScoped<IRecipeService, RecipeService>();
 builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IIngredientRecipeService, IngredientRecipeService>();
+builder.Services.AddScoped<ICategoryRecipeService, CategoryRecipeService>();
+builder.Services.AddScoped<IUserRecipeService, UserRecipeService>();
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();

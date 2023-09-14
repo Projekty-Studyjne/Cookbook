@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace TestProjectBLL
 {
-    internal class RecipeRepoFake : IGenericRepository<Recipe>
+    public class RecipeRepoFake : IGenericRepository<Recipe>
     {
         private List<Recipe> recipes = new List<Recipe>();
 
@@ -68,6 +68,12 @@ namespace TestProjectBLL
                 recipes[index] = recipe;
         }
 
+        public new void Delete(Recipe entityToDelete)
+        {
+            Recipe recipe = recipes.Find(s => s.recipeId == entityToDelete.recipeId);
+            recipes.Remove(recipe);
+        }
+
         public void Save()
         {
             //hehe
@@ -86,10 +92,6 @@ namespace TestProjectBLL
             //hehe
         }
 
-        public new void Delete(Recipe entityToDelete)
-        {
-            Recipe recipe = recipes.Find(s => s.recipeId == entityToDelete.recipeId);
-            recipes.Remove(recipe);
-        }
+     
     }
 }
