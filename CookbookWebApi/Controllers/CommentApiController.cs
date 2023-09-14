@@ -35,11 +35,14 @@ namespace CookbookWebApi.Controllers
             return null;
         }
 
-        [HttpGet("/CommentApi/ByRating/ratingId")]
-        public IEnumerable<CommentResponse> GetCommentByRating(int ratingId)
+        [HttpGet("/CommentApi/ByRating/{ratingId}")]
+        public CommentResponse GetCommentByRating(int ratingId)
         {
-            return _commentService.GetCommentByRating(ratingId).Result.Select(x => new CommentResponse(x.commentId, x.comment, x.ratingId));
+            Comment comment = null;
+            comment = _commentService.GetCommentByRating(ratingId).Result;
+            return new CommentResponse(comment.commentId,comment.comment,comment.ratingId);
         }
+        
 
         [HttpDelete("{id}")]
         public bool Delete(int id)

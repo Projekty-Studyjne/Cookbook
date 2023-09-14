@@ -29,12 +29,12 @@ namespace CookbookBLL
             return await Task.FromResult(comment);
         }
 
-        public async Task<IEnumerable<Comment>> GetCommentByRating(int ratingId)
+        public async Task<Comment> GetCommentByRating(int ratingId)
         {
             try
             {
-                var comment = await _unitOfWork.CommentRepository
-                    .GetAsync(r => r.Rating.ratingId == ratingId);
+                var comment = _unitOfWork.CommentRepository
+                    .GetAsync(r => r.Rating.ratingId == ratingId).Result.FirstOrDefault(x=>x.ratingId==ratingId);
 
                 return comment;
             }
