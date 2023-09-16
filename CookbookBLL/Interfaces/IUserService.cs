@@ -15,5 +15,6 @@ namespace CookbookBLL.Interfaces
         Task Add(User user);
         Task Delete(int userId);
         Task<User> AuthenticateUser(string username, string password);
+        Task<User> GetUserByRating(int ratingId);
     }
 }
