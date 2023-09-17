@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Http;
 using System.Data;
 using CookbookBLL;
 using CookbookMVCBLL.Models;
+using Microsoft.AspNetCore.Http;
 
 namespace CookbookMVCBLL.Controllers
 {
@@ -94,26 +95,32 @@ namespace CookbookMVCBLL.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        //public async Task<IActionResult> SelectIngredients()
-        //{
-        //    var ingredients = await service.GetAll();
+        public async Task<IActionResult> SelectIngredients()
+        {
+            var ingredients = await service.GetAll();
 
-        //    var ingredientList = ingredients.Select(i => new SelectListItem
-        //    {
-        //        Value = i.ingredientId.ToString(),
-        //        Text = $"{i.name} - {i.category}"
-        //    }).ToList();
+            var ingredientList = ingredients.Select(i => new SelectListItem
+            {
+                Value = i.ingredientId.ToString(),
+                Text = $"{i.name} - {i.category}"
+            }).ToList();
 
-        //    ViewBag.IngredientList = ingredientList;
+            ViewBag.IngredientList = ingredientList;
 
-        //    return View(ingredients.ToList());
-        //}
+            return View(ingredients.ToList());
+        }
 
-        //public IActionResult AddIngredients()
-        //{
-        //    return View();
-        //}
+        public IActionResult AddIngredients()
+        {
+            return View();
+        }
 
+        [HttpPost]
+        public IActionResult SaveSelectedIngredients(List<int> selectedIngredientsId)
+        {
+            TempData["SelectedIngredients"] = selectedIngredientsId;
+            return RedirectToAction("Create","Recipes");
+        }
 
         //public Task<IActionResult> AdIngredientToList(SelectedIngredients model, int ingredientId)
         //{
@@ -130,5 +137,14 @@ namespace CookbookMVCBLL.Controllers
         //    }
 
         //}
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> AddIngredients([Bind("ingredientId,name,category")] Ingredient ingredient)
+        {
+            service.Add(ingredient);
+            return RedirectToAction(nameof(SelectIngredients));
+            return View(ingredient);
+        }
     }
 }

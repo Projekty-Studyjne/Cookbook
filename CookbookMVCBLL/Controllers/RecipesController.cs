@@ -44,10 +44,10 @@ namespace CookbookMVCBLL.Controllers
             [ValidateAntiForgeryToken]
             public async Task<IActionResult> Create([Bind("recipeId,title,imageUrl,description,instructions,preparation_time,servings")] Recipe recipe)
             {
+            service.Add(recipe);
+            return RedirectToAction("Create","IngredientRecipes");
 
-                service.Add(recipe);
-                return RedirectToAction(nameof(Index));
-                return View(recipe);
+            return View(recipe);
             }
 
             public async Task<IActionResult> Edit(int id)

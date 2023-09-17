@@ -35,12 +35,14 @@ namespace CookbookMVCBLL.Controllers
             return View(ingredientRecipe);
         }
 
-        //public IActionResult Create()
-        //{
-        //    var ingredientIds = new List<int> { 1, 2, 3 };
-        //    ViewBag.IngredientIds = new SelectList(ingredientIds);
-        //    return View();
-        //}
+
+        public IActionResult Create()
+        {
+            //var ingredientIds = new List<int> { 1, 2, 3 };
+            //ViewBag.IngredientIds = new SelectList(ingredientIds);
+            var selectedIngredients = TempData["SelectedIngredients"] as List<int>;
+            return View();
+        }
 
         //[HttpPost]
         //[ValidateAntiForgeryToken]
