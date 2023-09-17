@@ -29,16 +29,16 @@
     </dl>
     <div>
         <div>
-            <a href="http://localhost:4200/LogUser/@Model.userId" class="btn btn-primary">Main Page</a>
+            <a href="http://localhost:4200/LogInUser/@Model.userId" class="btn btn-primary">Main Page</a>
         </div>
         <div>
             <a asp-action="EditAccount" asp-route-id="@Model.userId">Edit Account</a>
         </div>
         <div>
-            <a asp-controller="Recipes" asp-action="NewRecipe" asp-route-id="@Model.userId">Add your recipe!</a>
+            <a asp-controller="Ingredients" asp-action="SelectIngredients" asp-route-id="@Model.userId">Add your recipe!</a>
         </div>
         <div>
-            <a href="http://localhost:4200" class="btn btn-primary">Wyloguj</a>
+            <a href="http://localhost:4200/LogOutUser" class="btn btn-primary">Wyloguj</a>
         </div>
     </div>
 </div>

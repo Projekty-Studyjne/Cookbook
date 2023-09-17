@@ -10,6 +10,8 @@ using CookbookLibrary.Entities;
 using CookbookBLL.Interfaces;
 using Microsoft.AspNetCore.Http;
 using System.Data;
+using CookbookBLL;
+using CookbookMVCBLL.Models;
 
 namespace CookbookMVCBLL.Controllers
 {
@@ -28,7 +30,7 @@ namespace CookbookMVCBLL.Controllers
             return View(ingredient.ToList());
         }
 
-  
+
         public async Task<ViewResult> Details(int id)
         {
             Ingredient ingredient = await service.GetIngredientById(id);
@@ -44,8 +46,8 @@ namespace CookbookMVCBLL.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("ingredientId,name,category")] Ingredient ingredient)
         {
-                service.Add(ingredient);
-                return RedirectToAction(nameof(Index));
+            service.Add(ingredient);
+            return RedirectToAction(nameof(Index));
             return View(ingredient);
         }
 
@@ -63,16 +65,16 @@ namespace CookbookMVCBLL.Controllers
             {
                 return NotFound();
             }
-                try
-                {
-                    service.Update(ingredient);
-                    
-                }
-                catch (DataException)
-                {
-                    ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists, see your system administrator.");
-                }
-                return RedirectToAction(nameof(Index));
+            try
+            {
+                service.Update(ingredient);
+
+            }
+            catch (DataException)
+            {
+                ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists, see your system administrator.");
+            }
+            return RedirectToAction(nameof(Index));
             return View(ingredient);
         }
 
@@ -92,20 +94,41 @@ namespace CookbookMVCBLL.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        [HttpGet]
-        public IActionResult NewIngredient()
-        {
-            return View();
-        }
+        //public async Task<IActionResult> SelectIngredients()
+        //{
+        //    var ingredients = await service.GetAll();
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> NewIngredient([Bind("recipeId,title,description,instructions,preparation_time,servings")] Ingredient ingredient)
-        {
-            service.Add(ingredient);
-            return RedirectToAction(nameof(Index));
-            return View(ingredient);
-        }
+        //    var ingredientList = ingredients.Select(i => new SelectListItem
+        //    {
+        //        Value = i.ingredientId.ToString(),
+        //        Text = $"{i.name} - {i.category}"
+        //    }).ToList();
 
+        //    ViewBag.IngredientList = ingredientList;
+
+        //    return View(ingredients.ToList());
+        //}
+
+        //public IActionResult AddIngredients()
+        //{
+        //    return View();
+        //}
+
+
+        //public Task<IActionResult> AdIngredientToList(SelectedIngredients model, int ingredientId)
+        //{
+        //    if (model != null)
+        //    {
+        //        int id = 0;
+
+        //        if (model.Ingredients != null && model.Ingredients.Any())
+        //        {
+        //            id = model.Ingredients.FirstOrDefault()?.ingredientId ?? 0;
+        //        }
+
+        //        return View("SelectIngredients");
+        //    }
+
+        //}
     }
 }

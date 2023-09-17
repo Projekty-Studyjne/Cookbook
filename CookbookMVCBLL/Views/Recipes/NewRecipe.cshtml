@@ -12,10 +12,16 @@
     <div class="col-md-4">
         <form asp-action="NewRecipe">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" id="recipeId" name="recipeId" value="@Model.recipeId" />
             <div class="form-group">
                 <label asp-for="title" class="control-label"></label>
                 <input asp-for="title" class="form-control" />
                 <span asp-validation-for="title" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="imageUrl" class="control-label"></label>
+                <input asp-for="imageUrl" class="form-control" />
+                <span asp-validation-for="imageUrl" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="description" class="control-label"></label>
@@ -36,12 +42,8 @@
                 <label asp-for="servings" class="control-label"></label>
                 <input asp-for="servings" class="form-control" />
                 <span asp-validation-for="servings" class="text-danger"></span>
-            </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-            <div class="form-group">
-                <a asp-controller="Ingredients" asp-action="NewIngredient">Next</a>
+                <a asp-controller="IngredientRecipes" asp-action="Create">Next</a>
             </div>
         </form>
     </div>

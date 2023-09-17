@@ -35,7 +35,7 @@ namespace CookbookWebApi.Controllers
             return null;
         }
 
-        [HttpGet("/RatingsApi/ByRecipe/{recipeId}")]
+        [HttpGet("/RatingApi/ByRecipe/{recipeId}")]
         public IEnumerable<RatingResponse> GetRatingsByRecipe(int recipeId)
         {
             return _ratingService.GetRatingsByRecipe(recipeId).Result.Select(x => new RatingResponse(x.ratingId, x.rating, x.userId, x.recipeId));

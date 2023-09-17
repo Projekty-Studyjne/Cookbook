@@ -84,5 +84,13 @@ namespace CookbookBLL
 
             return user;
         }
+
+        public async Task<User> GetUserByRating(int ratingId)
+        {
+            var user = await _unitOfWork.RatingRepository
+            .GetAsync(filter: r => r.ratingId == ratingId, includeProperties: "User");
+
+            return user.FirstOrDefault()?.User;
+        }
     }
 }

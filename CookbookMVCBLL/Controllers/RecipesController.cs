@@ -10,56 +10,61 @@ using CookbookLibrary.Entities;
 using CookbookBLL.Interfaces;
 using CookbookLibrary.Repositories;
 using System.Data;
+using CookbookBLL;
 
 namespace CookbookMVCBLL.Controllers
 {
     public class RecipesController : Controller
     {
-        private IRecipeService service;
+            private IRecipeService service;
 
-        public RecipesController(IRecipeService service)
-        {
-            this.service = service;
-        }
-        public async Task<IActionResult> Index()
-        {
-            var recipes = await service.GetAll();
-            return View(recipes.ToList());
-        }
-        public async Task<ViewResult> Details(int id)
-        {
+            public RecipesController(IRecipeService service)
+            {
+                this.service = service;
+            }
+
+            public async Task<ViewResult> Index()
+            {
+                var recipe = await service.GetAll();
+                return View(recipe.ToList());
+            }
+
+            public async Task<ViewResult> Details(int id)
+            {
             Recipe recipe = await service.GetRecipeById(id);
-            return View(recipe);
-        }
+                return View(recipe);
+            }
 
-        public IActionResult Create()
-        {
-            return View();
-        }
+            public IActionResult Create()
+            {
+                return View();
+            }
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("recipeId,title,description,instructions,preparation_time,servings")] Recipe recipe)
-        {
+            [HttpPost]
+            [ValidateAntiForgeryToken]
+            public async Task<IActionResult> Create([Bind("recipeId,title,imageUrl,description,instructions,preparation_time,servings")] Recipe recipe)
+            {
+
                 service.Add(recipe);
                 return RedirectToAction(nameof(Index));
-            return View(recipe);
-        }
-
-        public async Task<IActionResult> Edit(int id)
-        {
-            Recipe recipe = await service.GetRecipeById(id);
-            return View(recipe);
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("recipeId,title,description,instructions,preparation_time,servings")] Recipe recipe)
-        {
-            if (id != recipe.recipeId)
-            {
-                return NotFound();
+                return View(recipe);
             }
+
+            public async Task<IActionResult> Edit(int id)
+            {
+            Recipe recipe = await service.GetRecipeById(id);
+                return View(recipe);
+            }
+
+            [HttpPost]
+            [ValidateAntiForgeryToken]
+            public async Task<IActionResult> Edit(int id, [Bind("recipeId,title,imageUrl,description,instructions,preparation_time,servings")] Recipe recipe)
+            {
+                if (id != recipe.recipeId)
+                {
+                    return NotFound();
+                }
+
                 try
                 {
                     service.Update(recipe);
@@ -68,34 +73,35 @@ namespace CookbookMVCBLL.Controllers
                 {
                     ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists, see your system administrator.");
                 }
+
                 return RedirectToAction(nameof(Index));
 
-            return View(recipe);
-        }
+                return View(recipe);
+            }
 
-        public async Task<IActionResult> Delete(int id)
-        {
+            public async Task<IActionResult> Delete(int id)
+            {
+                Recipe recipe = await service.GetRecipeById(id);
+                await service.Delete(recipe.recipeId);
+                return View(recipe);
+            }
 
+            [HttpPost, ActionName("Delete")]
+            [ValidateAntiForgeryToken]
+            public async Task<IActionResult> DeleteConfirmed(int id)
+            {
             Recipe recipe = await service.GetRecipeById(id);
-            await service.Delete(recipe.recipeId);
-            return View(recipe);
-        }
+                service.Delete(id);
+                return RedirectToAction(nameof(Index));
+            }
 
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
-        {
-            Recipe recipe = await service.GetRecipeById(id);
-            service.Delete(id);
-            return RedirectToAction(nameof(Index));
-        }
-
-        public async Task<IActionResult> RecipesByIngredient(int ingredientId)
-        {
-            var recipes = await service.GetRecipeById(ingredientId);
+            public async Task<IActionResult> RecipesByIngredientName(string ingredientname)
+            {
+            var recipes = await service.GetRecipesByName(ingredientname);
 
             return View(recipes);
-        }
+            }
+
         public async Task<IActionResult> RecipeByCategory(int categoryId)
         {
             var recipe = await service.GetRecipesByCategory(categoryId);
@@ -111,7 +117,8 @@ namespace CookbookMVCBLL.Controllers
         [HttpGet]
         public IActionResult NewRecipe()
         {
-            return View();
+            Recipe recipe = new Recipe();
+            return View(recipe);
         }
 
         [HttpPost]
@@ -119,9 +126,12 @@ namespace CookbookMVCBLL.Controllers
         public async Task<IActionResult> NewRecipe([Bind("recipeId,title,description,instructions,preparation_time,servings")] Recipe recipe)
         {
             service.Add(recipe);
-            return RedirectToAction("NewIngredients", "Ingredients", new { id = recipe.recipeId});
-            return View(recipe);
+            //return RedirectToAction("Create", "IngredientRecipe", new { id = recipe.recipeId });
+            //return View(recipe);
+            ViewBag.NewRecipeId = recipe.recipeId;
+
+            return RedirectToAction("Create", "IngredientRecipes");
         }
-       
+
     }
 }
