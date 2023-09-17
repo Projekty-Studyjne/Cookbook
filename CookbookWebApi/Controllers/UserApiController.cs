@@ -16,9 +16,6 @@ namespace CookbookWebApi.Controllers
         [HttpGet]
         public IEnumerable<UserResponse> GetAll()
         {
-            //IEnumerable<User> users = new List<User>();
-            //users = _userService.GetAll().Result;
-            //return users;
             return _userService.GetAll().Result.Select(x => new UserResponse(x.userId, x.username,x.email,x.password));
         }
 
@@ -28,6 +25,18 @@ namespace CookbookWebApi.Controllers
             User user = null;
             user = _userService.GetUserById(id).Result;
             if(user != null)
+            {
+                return new UserResponse(user.userId, user.username, user.email, user.password);
+            }
+            return null;
+        }
+
+        [HttpGet("/UserApi/ByRating/{ratingId}")]
+        public UserResponse GetUserByRating(int ratingId)
+        {
+            User user = null;
+            user = _userService.GetUserByRating(ratingId).Result;
+            if (user != null)
             {
                 return new UserResponse(user.userId, user.username, user.email, user.password);
             }
