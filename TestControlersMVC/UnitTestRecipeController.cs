@@ -14,7 +14,7 @@ namespace TestControlersMVC
     public class UnitTestRecipeController
     {
         [Fact]
-        public async void Index_ReturnsViewWithRecipesList()
+        public async void TestIndex()
         {
             var mockService = new Mock<IRecipeService>();
             var recipesController = new RecipesController(mockService.Object);
@@ -37,7 +37,7 @@ namespace TestControlersMVC
             Assert.Equal(recipes, model);
         }
         [Fact]
-        public async void CreatePost_WithValidModel_ReturnsRedirectToAction()
+        public async void TestCreatePost()
         {
             var mockService = new Mock<IRecipeService>();
             var recipesController = new RecipesController(mockService.Object);
@@ -48,7 +48,7 @@ namespace TestControlersMVC
         }
 
         [Fact]
-        public async void EditPost_WithValidModel_ReturnsRedirectToAction()
+        public async void TestEditPost()
         {
             var mockService = new Mock<IRecipeService>();
             var recipesController = new RecipesController(mockService.Object);
@@ -61,7 +61,7 @@ namespace TestControlersMVC
         }
 
         [Fact]
-        public async void DeleteConfirmed_ReturnsRedirectToAction()
+        public async void TestDeleteConfirmed()
         {
             var mockService = new Mock<IRecipeService>();
             var recipesController = new RecipesController(mockService.Object);
@@ -73,7 +73,7 @@ namespace TestControlersMVC
             mockService.Verify();
         }
         [Fact]
-        public async void Delete_ReturnsViewWithRecipe()
+        public async void TestDelete()
         {
             var mockService = new Mock<IRecipeService>();
             var recipesController = new RecipesController(mockService.Object);
@@ -86,22 +86,22 @@ namespace TestControlersMVC
             Assert.Equal(recipe, model);
         }
 
-        //[Fact]
-        //public void RecipesByIngredient_ReturnsViewWithRecipes()
-        //{
-        //    var mockService = new Mock<IRecipeService>();
-        //    var recipesController = new RecipesController(mockService.Object);
-        //    var ingredientName = "Pizza";
-        //    var recipes = new List<Recipe>();
-        //    mockService.Setup(service => service.GetRecipesByIngredientName(ingredientName)).ReturnsAsync(recipes);
-        //    var result = recipesController.GetRecipesByIngredientName(ingredientName);
-        //    var viewResult = Assert.IsType<ViewResult>(result);
-        //    var model = Assert.IsAssignableFrom<IEnumerable<Recipe>>(viewResult.ViewData.Model);
-        //    Assert.Equal(recipes, model);
-        //}
+        [Fact]
+        public async void TestRecipesByIngredient()
+        {
+            var mockService = new Mock<IRecipeService>();
+            var recipesController = new RecipesController(mockService.Object);
+            var ingredientName = "Pizza";
+            var recipes = new List<Recipe>();
+            mockService.Setup(service => service.GetRecipesByIngredientName(ingredientName)).ReturnsAsync(recipes);
+            var result = await recipesController.RecipesByIngredientName(ingredientName);
+            var viewResult = Assert.IsType<ViewResult>(result);
+            var model = Assert.IsAssignableFrom<IEnumerable<Recipe>>(viewResult.ViewData.Model);
+            Assert.Equal(recipes, model);
+        }
 
         [Fact]
-        public async void RecipeByCategory_ReturnsViewWithRecipes()
+        public async void TestRecipeByCategory()
         {
             var mockService = new Mock<IRecipeService>();
             var recipesController = new RecipesController(mockService.Object);
@@ -124,34 +124,8 @@ namespace TestControlersMVC
             Assert.Equal(recipes, model);
         }
 
-        //[Fact]
-        //public void NewRecipePost_WithValidModel_ReturnsRedirectToAction()
-        //{
-        //    var mockService = new Mock<IRecipeService>();
-        //    var recipesController = new RecipesController(mockService.Object);
-        //    var recipe = new Recipe(); // Wstaw tutaj przykładowy przepis.
-        //    mockService.Setup(service => service.Add(recipe)).Verifiable();
-        //    var result = recipesController.NewRecipe(recipe);
-        //    var redirectToActionResult = Assert.IsType<RedirectToActionResult>(result);
-        //    Assert.Equal("NewIngredients", redirectToActionResult.ActionName);
-        //    Assert.Equal("Ingredients", redirectToActionResult.ControllerName);
-        //    Assert.Equal(new { id = recipe.recipeId }, redirectToActionResult.RouteValues);
-        //    mockService.Verify(); // Upewnij się, że metoda Add została wywołana
-        //}
-
-        //[Fact]
-        //public void NewRecipePost_WithInvalidModel_ReturnsViewWithModel()
-        //{
-        //    var mockService = new Mock<IRecipeService>();
-        //    var recipesController = new RecipesController(mockService.Object);
-        //    recipesController.ModelState.AddModelError("error", "some error message");
-        //    var recipe = new Recipe(); // Wstaw tutaj niepoprawny przepis.
-        //    var result = await recipesController.NewRecipe(recipe);
-        //    var viewResult = Assert.IsType<ViewResult>(result);
-        //    Assert.Equal(recipe, viewResult.Model);
-        //}
         [Fact]
-        public async void AddCategoryToRecipe_ReturnsView()
+        public async void TestAddCategoryToRecipe()
         {
             var mockService = new Mock<IRecipeService>();
             var recipesController = new RecipesController(mockService.Object);
@@ -165,7 +139,7 @@ namespace TestControlersMVC
         }
 
         [Fact]
-        public void NewRecipe_Get_ReturnsView()
+        public void TestNewRecipe()
         {
             var mockService = new Mock<IRecipeService>();
             var recipesController = new RecipesController(mockService.Object);

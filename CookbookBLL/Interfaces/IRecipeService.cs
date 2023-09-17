@@ -12,6 +12,7 @@ namespace CookbookBLL.Interfaces
         Task<IEnumerable<Recipe>> GetRecipesByIngredientName(string ingredientName);
         Task<IEnumerable<Recipe>> GetRecipesByName(string name);
         Task<IEnumerable<Recipe>> GetRecipesByCategory(int categoryId);
+        Task GetMaxId();
         Task AddCategoryToRecipe(int recipeId, Category category);
     }
 }

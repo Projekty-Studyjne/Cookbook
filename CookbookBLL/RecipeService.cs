@@ -153,5 +153,11 @@ namespace CookbookBLL
                 _unitOfWork.Save();
         }
 
+        public Task GetMaxId()
+        {
+            var recipes = _unitOfWork.RecipeRepository.GetAsync();
+            return Task.FromResult(recipes.Result.Max(r => r.recipeId));
+
+        }
     }
 }

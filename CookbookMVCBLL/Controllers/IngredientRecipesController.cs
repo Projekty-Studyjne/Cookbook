@@ -36,10 +36,11 @@ namespace CookbookMVCBLL.Controllers
         }
 
 
-        public IActionResult Create()
+        public IActionResult Create(int ingredientId)
         {
             //var ingredientIds = new List<int> { 1, 2, 3 };
-            //ViewBag.IngredientIds = new SelectList(ingredientIds);
+            ViewBag.ingredientId = ingredientId;
+            ViewBag.recipeId = (int)TempData["recipeId"];
             var selectedIngredients = TempData["SelectedIngredients"] as List<int>;
             return View();
         }

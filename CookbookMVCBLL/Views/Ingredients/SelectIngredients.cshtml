@@ -38,13 +38,13 @@ $(document).ready(function () {
                 <tr>
                     <td>
                         @Html.DisplayFor(modelItem => item.name)
-                        <input type="hidden" name="selectedIngredient" value="@item.ingredientId"/>
+                        <input type="hidden" name="selectedIngredient" value="@item.ingredientId" />
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.category)
                     </td>
                     <td>
-                        <input type="checkbox" id="ids" name="selectedIngredientsId" value="@item.ingredientId"/>
+                        <a href="@Url.Action("Create", "IngredientRecipes", new { ingredientId = item.ingredientId })" class="btn btn-primary">Dodaj</a>
                     </td>
                 </tr>
             }

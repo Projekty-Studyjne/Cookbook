@@ -44,10 +44,9 @@ namespace CookbookMVCBLL.Controllers
             [ValidateAntiForgeryToken]
             public async Task<IActionResult> Create([Bind("recipeId,title,imageUrl,description,instructions,preparation_time,servings")] Recipe recipe)
             {
-            service.Add(recipe);
-            return RedirectToAction("Create","IngredientRecipes");
-
-            return View(recipe);
+                service.Add(recipe);
+                TempData["recipeId"]= service.GetMaxId();
+            return RedirectToAction("SelectIngredients","Ingredients");
             }
 
             public async Task<IActionResult> Edit(int id)

@@ -48,6 +48,7 @@ namespace CookbookMVCBLL.Controllers
         public async Task<IActionResult> Create([Bind("ingredientId,name,category")] Ingredient ingredient)
         {
             service.Add(ingredient);
+            
             return RedirectToAction(nameof(Index));
             return View(ingredient);
         }
@@ -104,7 +105,6 @@ namespace CookbookMVCBLL.Controllers
                 Value = i.ingredientId.ToString(),
                 Text = $"{i.name} - {i.category}"
             }).ToList();
-
             ViewBag.IngredientList = ingredientList;
 
             return View(ingredients.ToList());

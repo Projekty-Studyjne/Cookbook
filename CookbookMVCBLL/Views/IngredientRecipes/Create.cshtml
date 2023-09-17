@@ -13,18 +13,10 @@
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="ingredientId" class="control-label"></label>
-                <select asp-for="ingredientId" class="form-control" asp-items="ViewBag.SelectedIngredients">
-                <option value="">-- Select Ingredient --</option>
-                @*@foreach (var ingredientId in ViewBag.SelectedIngredients)
-                {
-                    <option value="@ingredientId">@ingredientId</option>
-                }*@
-               </select>
+                <label asp-for="ingredientId" class="control-label">@ViewBag.ingredientId</label>
             </div>
             <div class="form-group">
-                <label asp-for="recipeId" class="control-label"></label>
-                <input asp-for="recipeId" class="form-control" value="@ViewBag.NewRecipeId" />
+                <label asp-for="recipeId" class="control-label">@ViewBag.recipeId</label>
             </div>
             <div class="form-group">
                 <label asp-for="quantity" class="control-label"></label>
