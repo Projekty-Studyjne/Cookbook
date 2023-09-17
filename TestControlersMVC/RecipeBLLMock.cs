@@ -52,5 +52,15 @@ namespace TestControlersMVC
         {
             throw new NotImplementedException();
         }
+
+        public Task<IEnumerable<Recipe>> GetRecipesByIngredientName(string ingredientName)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<IEnumerable<Recipe>> GetRecipesByName(string name)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
