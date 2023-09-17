@@ -1,0 +1,57 @@
+﻿@model IEnumerable<CookbookLibrary.Entities.Ingredient>
+
+@{
+    ViewData["Title"] = "SelectIngredients";
+}
+<script>
+$(document).ready(function () {
+        $('#ids').change(function () {
+        if ($(this).is(':checked')) {
+            $.ajax({    
+                    url: '/Ingredients/AdIngredientToList',
+                    type: 'POST', 
+                    data: { $(this).val() },
+                    //success: function (data) {
+                    //    // Obsługa sukcesu
+                    //    // Tutaj możesz zaktualizować widok lub podejmować inne działania
+                    //},
+                    });
+
+            } else {
+
+        }
+    });
+</script>
+
+<form asp-controller="IngredientsRecipe" asp-action="SaveSelectedIngredients" method="post">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.name)</th>
+                <th>@Html.DisplayNameFor(model => model.category)</th>
+                <th>Select</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.name)
+                        <input type="hidden" name="selectedIngredient" value="@item.ingredientId"/>
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.category)
+                    </td>
+                    <td>
+                        <input type="checkbox" id="ids" name="selectedIngredientsId" value="@item.ingredientId"/>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    The ingredient you are looking for is not on the list? <a asp-action="AddIngredients">Add Ingredients</a>
+    <a asp-controller="Recipes" asp-action="NewRecipe">Next</a>
+
+    <button type="submit" formaction="/Ingredientrecipes/Create" formmethod="post">Save Selected Ingredients</button>
+</form>

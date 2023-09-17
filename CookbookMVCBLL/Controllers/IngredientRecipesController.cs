@@ -9,6 +9,8 @@ using CookbookLibrary;
 using CookbookLibrary.Entities;
 using CookbookBLL.Interfaces;
 using System.Data;
+using Microsoft.Ajax.Utilities;
+using CookbookBLL;
 
 namespace CookbookMVCBLL.Controllers
 {
@@ -33,20 +35,59 @@ namespace CookbookMVCBLL.Controllers
             return View(ingredientRecipe);
         }
 
-        public IActionResult Create()
-        {
-            return View();
-        }
+        //public IActionResult Create()
+        //{
+        //    var ingredientIds = new List<int> { 1, 2, 3 };
+        //    ViewBag.IngredientIds = new SelectList(ingredientIds);
+        //    return View();
+        //}
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ingredientId,recipeId,quantity,unit")] IngredientRecipe ingredientRecipe)
-        {
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public async Task<IActionResult> Create([Bind("ingredientId,recipeId,quantity,unit")] IngredientRecipe ingredientRecipe)
+        //{
+        //    //var ingredientIds = new List<int> { 1, 2, 3 };
+        //    //ViewBag.IngredientIds = new SelectList(ingredientIds);
+        //    service.Add(ingredientRecipe);
+        //    return RedirectToAction(nameof(Index));
+        //    return View(ingredientRecipe);
+        //}
+        //[HttpGet]
+        //public IActionResult Create(IEnumerable<int> selectedIngredients)
+        //{
+        //    ViewBag.SelectedIngredients = selectedIngredients;
+        //    return View(selectedIngredients);
+        //}
+        //public IActionResult Create(List<int> selectedIngredients)
+        //{
+        //    //List<int> selectedIngredients = TempData["SelectedIngredients"] as List<int>;
+        //    //List<SelectListItem> selectListItems = selectedIngredients.Select(id => new SelectListItem { Value = id.ToString(), Text = id.ToString() }).ToList();
+        //    //ViewBag.SelectedIngredients = new SelectList(selectListItems, "Value", "Text");
+        //    //List<int> selectedIngredients = TempData["SelectedIngredients"] as List<int>;
+        //    //return View(selectedIngredients);
+        //    //List<int> selectedIngredients = TempData["SelectedIngredients"] as List<int>;
+        //    return View(selectedIngredients);
+        //}
+        //public IActionResult Create()
+        //{
+        //    List<int> selectedIngredients = TempData["SelectedIngredients"] as List<int>;
 
-            service.Add(ingredientRecipe);
-            return RedirectToAction(nameof(Index));
-            return View(ingredientRecipe);
-        }
+        //    // Tutaj możesz wykonać odpowiednie operacje na wybranych składnikach.
+        //    // Możesz również przekształcić te składniki na SelectListItem lub inny format, który jest potrzebny w Twoim widoku.
+
+        //    ViewBag.SelectedIngredients = selectedIngredients;
+
+        //    return View();
+        //}
+
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public async Task<IActionResult> Create([Bind("ingredientId,recipeId,quantity,unit")] IngredientRecipe ingredientRecipe)
+        //{
+        //    service.Add(ingredientRecipe);
+        //    return RedirectToAction(nameof(Index));
+        //    return View(ingredientRecipe);
+        //}
 
         public async Task<IActionResult> Edit(int id)
         {

@@ -74,6 +74,24 @@ namespace CookbookBLL
                 throw;
             }
         }
+
+        public IEnumerable<Ingredient> GetAllIngredientsWithNames()
+        {
+            var ingredients = _unitOfWork.IngredientRepository.GetAsync().Result; 
+            var ingredientRecipeList = new List<Ingredient>();
+
+            foreach (var ingredient in ingredients)
+            {
+                var ingredientWithNames = new Ingredient 
+                {
+                    ingredientId = ingredient.ingredientId,
+                    name = ingredient.name
+                };
+
+                ingredientRecipeList.Add(ingredientWithNames);
+            }
+            return ingredientRecipeList;
+        }
     }
 }
 

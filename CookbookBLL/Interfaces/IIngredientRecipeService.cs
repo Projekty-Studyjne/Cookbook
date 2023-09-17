@@ -14,5 +14,6 @@ namespace CookbookBLL.Interfaces
         Task Update(IngredientRecipe ingredientRecipe);
         Task Delete(int ingredientId);
         Task Add(IngredientRecipe ingredientRecipe);
+        IEnumerable<Ingredient> GetAllIngredientsWithNames();
     }
 }
