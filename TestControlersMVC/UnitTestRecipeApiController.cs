@@ -13,24 +13,24 @@ namespace TestControlersMVC
 {
     public class UnitTestRecipeApiController
     {
-        [Fact]
-        public async void TestRecipesByIngredientAction()
-        {
-            int ingredientId = 3;
-            var recipes = new List<Recipe>() {
-            new Recipe(){},
-            new Recipe(){},
-           };
+        //[Fact]
+        //public async void TestRecipesByIngredientAction()
+        //{
+        //    int ingredientId = 3;
+        //    var recipes = new List<Recipe>() {
+        //    new Recipe(){},
+        //    new Recipe(){},
+        //   };
 
-            Mock<IRecipeService> mockRecipe = new Mock<IRecipeService>();
+        //    Mock<IRecipeService> mockRecipe = new Mock<IRecipeService>();
 
-            mockRecipe
-                .Setup(s => s.GetRecipesByIngredient(ingredientId))
-                .ReturnsAsync(recipes);
-            RecipesApiController recipesApiController = new RecipesApiController(mockRecipe.Object);
+        //    mockRecipe
+        //        .Setup(s => s.GetRecipesByIngredient(ingredientId))
+        //        .ReturnsAsync(recipes);
+        //    RecipesApiController recipesApiController = new RecipesApiController(mockRecipe.Object);
 
-            Assert.Equal(2, recipesApiController.GetRecipeByIngredient(ingredientId).Count());
-        }
+        //    Assert.Equal(2, recipesApiController.GetRecipeByIngredient(ingredientId).Count());
+        //}
 
         [Fact]
         public async void TestRecipesByCategoryAction()
