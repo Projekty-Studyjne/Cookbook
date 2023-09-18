@@ -11,12 +11,14 @@ using CookbookBLL.Interfaces;
 using System.Data;
 using Microsoft.Ajax.Utilities;
 using CookbookBLL;
+using CookbookLibrary.Migrations;
 
 namespace CookbookMVCBLL.Controllers
 {
     public class IngredientRecipesController : Controller
     {
         private IIngredientRecipeService service;
+        private static int recipeIdtemp, ingredientIdtemp;
 
         public IngredientRecipesController(IIngredientRecipeService service)
         {
@@ -39,10 +41,20 @@ namespace CookbookMVCBLL.Controllers
         public IActionResult Create(int ingredientId)
         {
             //var ingredientIds = new List<int> { 1, 2, 3 };
-            ViewBag.ingredientId = ingredientId;
-            ViewBag.recipeId = (int)TempData["recipeId"];
-            var selectedIngredients = TempData["SelectedIngredients"] as List<int>;
+            ingredientIdtemp = ingredientId;
+            recipeIdtemp = (int)TempData["recipeId"];
             return View();
+        }
+
+        public IActionResult AddToDatabase([Bind("quantity, unit")] IngredientRecipe ingredientRecipe)
+        {
+            IngredientRecipe ingredientRecipeTemp = new IngredientRecipe();
+            ingredientRecipeTemp.recipeId = recipeIdtemp;
+            ingredientRecipeTemp.ingredientId = ingredientIdtemp;
+            ingredientRecipeTemp.unit = ingredientRecipe.unit;
+            ingredientRecipeTemp.quantity = ingredientRecipe.quantity;
+            service.Add(ingredientRecipeTemp);
+            return RedirectToAction("SelectIngredients", "Ingredients");
         }
 
         //[HttpPost]

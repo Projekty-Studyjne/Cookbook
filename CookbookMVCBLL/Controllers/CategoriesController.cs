@@ -43,6 +43,17 @@ namespace CookbookMVC.Controllers
             return View();
         }
 
+     
+        public IActionResult AddCategoryToRecipe(int categoryId)
+        {
+            int recipeId = 1;
+            if (TempData["recipeId"] != null)
+            {
+                recipeId = (int)TempData["recipeId"];
+                // Dalsza logika
+            }
+            return RedirectToAction("AddCategoryToRecipe", "Recipes", new { categoryId = categoryId, recipeId = recipeId });
+        }
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("categoryId,name,description")] Category category)
@@ -93,5 +104,7 @@ namespace CookbookMVC.Controllers
             service.Delete(id);
             return RedirectToAction(nameof(Index));
         }
+
+
     }
 }

@@ -129,34 +129,40 @@ namespace CookbookBLL
         }
 
 
-        public async Task AddCategoryToRecipe(int recipeId, Category category)
+        public async Task AddCategoryToRecipe(int recipeId, int categoryId)
         {
+            var recipe = _unitOfWork.RecipeRepository.GetByID(recipeId);
 
-            var recipes = await _unitOfWork.RecipeRepository.GetAsync(r => r.recipeId == recipeId,
-                                                          includeProperties: "CategoryRecipes");
-            var recipe = recipes.SingleOrDefault();
-                                                         
-                if (recipe == null)
-                {
-                    throw new Exception("Recipe not found");
-                }
+            if (recipe == null)
+            {
+                throw new Exception("Recipe not found");
+            }
 
-                var existingCategoryRecipe = recipe.CategoryRecipes
-                                                   .SingleOrDefault(cr => cr.categoryId == category.categoryId);
-                if (existingCategoryRecipe != null) 
-                {
-                    throw new Exception("Category already assigned to recipe");
-                }
+            var category = _unitOfWork.CategoryRepository.GetByID(categoryId);
 
-                var categoryRecipe = new CategoryRecipe { Recipe = recipe, Category = category };
-                _unitOfWork.CategoryRecipeRepository.Insert(categoryRecipe);
-                _unitOfWork.Save();
+            if (category == null)
+            {
+                throw new Exception("Category not found");
+            }
+
+            var existingCategoryRecipe = recipe.CategoryRecipes.SingleOrDefault(cr => cr.categoryId == categoryId);
+
+            if (existingCategoryRecipe != null)
+            {
+                throw new Exception("Category already assigned to recipe");
+            }
+
+            var categoryRecipe = new CategoryRecipe { Recipe = recipe, Category = category };
+            _unitOfWork.CategoryRecipeRepository.Insert(categoryRecipe);
+            _unitOfWork.Save();
         }
 
-        public Task GetMaxId()
+
+
+        public int GetMaxId()
         {
             var recipes = _unitOfWork.RecipeRepository.GetAsync();
-            return Task.FromResult(recipes.Result.Max(r => r.recipeId));
+            return recipes.Result.Max(r => r.recipeId);
 
         }
     }

@@ -92,5 +92,6 @@ namespace CookbookMVCBLL.Controllers
             service.Delete(id);
             return RedirectToAction(nameof(Index));
         }
+
     }
 }

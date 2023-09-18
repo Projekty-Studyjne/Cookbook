@@ -116,10 +116,9 @@ namespace CookbookMVCBLL.Controllers
         }
 
         [HttpPost]
-        public IActionResult SaveSelectedIngredients(List<int> selectedIngredientsId)
+        public IActionResult ChooseCategory()
         {
-            TempData["SelectedIngredients"] = selectedIngredientsId;
-            return RedirectToAction("Create","Recipes");
+            return RedirectToAction("Index","Categories");
         }
 
         //public Task<IActionResult> AdIngredientToList(SelectedIngredients model, int ingredientId)

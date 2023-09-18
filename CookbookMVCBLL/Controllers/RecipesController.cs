@@ -107,9 +107,9 @@ namespace CookbookMVCBLL.Controllers
             return View(recipe);
         }
 
-        public async Task<IActionResult> AddCategoryToRecipe(int recipeId, Category category)
+        public async Task<IActionResult> AddCategoryToRecipe(int recipeId, int categoryId)
         {
-            await service.AddCategoryToRecipe(recipeId, category);
+            await service.AddCategoryToRecipe(recipeId, categoryId);
             return View();
         }
 
