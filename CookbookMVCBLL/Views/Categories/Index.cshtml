@@ -3,12 +3,81 @@
 @{
     ViewData["Title"] = "Index";
 }
+<style>
+    table thead tr:first-child {
+        background-color: #FBF1E7;
+    }
 
-<h1>Index</h1>
+    h1 {
+        margin-top: 20px;
+        font-size: 24px;
+        margin-bottom: 20px;
+        text-align:center;
+        color: #333;
+    }
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
+    form div {
+        margin-bottom: 15px;
+        text-align: left;
+    }
+
+    label {
+        display: block;
+        font-weight: bold;
+    }
+
+    input[type="text"],
+    input[type="password"] {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 3px;
+        font-size: 16px;
+    }
+
+    .text-danger {
+        color: #f00;
+    }
+
+    input[type="submit"] {
+        background-color: #773F26;
+        color: #fff;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        font-size: 18px;
+        cursor: pointer;
+        text-align: center;
+        width: 100%;
+    }
+
+    a {
+        text-decoration: none;
+        color: #773F26;
+        font-weight: bold
+    }
+
+        a:hover {
+            text-decoration: underline;
+            color: #4A2718;
+        }
+
+        a.btn {
+            background-color: #773F26;
+            color: #fff;
+            border-style:none;
+        }
+
+            a.btn:hover {
+                background-color: #4A2718;
+            }
+    .next{
+        text-align: right;
+    }
+</style>
+
+<h1>Add category to your recipe</h1>
+
 <table class="table">
     <thead>
         <tr>
@@ -37,3 +106,6 @@
 }
     </tbody>
 </table>
+<div>
+   The category you are looking for is not on the list? <a asp-action="Create">Add Category</a>
+</div>
