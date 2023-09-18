@@ -1,4 +1,5 @@
-﻿using CookbookBLL.Interfaces;
+﻿using CookbookBLL;
+using CookbookBLL.Interfaces;
 using CookbookLibrary.Entities;
 using CookbookMVCBLL.Controllers;
 using Microsoft.AspNetCore.Mvc;
@@ -44,7 +45,7 @@ namespace TestControlersMVC
             var recipe = new Recipe{ recipeId = 1, title = "Test Recipe" };
             var result = await recipesController.Create(recipe);
             var redirectToActionResult = Assert.IsType<RedirectToActionResult>(result);
-            Assert.Equal("Index", redirectToActionResult.ActionName);
+            Assert.Equal("SelectIngredients", redirectToActionResult.ActionName);
         }
 
         [Fact]
@@ -130,71 +131,12 @@ namespace TestControlersMVC
             var mockService = new Mock<IRecipeService>();
             var recipesController = new RecipesController(mockService.Object);
             var recipeId = 1;
-            var category = new Category { categoryId = 1, name = "Breakfast", description = "Delicious breakfast recipes" };
-            mockService.Setup(service => service.AddCategoryToRecipe(recipeId, category)).Verifiable();
-            var result = await recipesController.AddCategoryToRecipe(recipeId, category);
-            var viewResult = Assert.IsType<ViewResult>(result);
-            Assert.Equal("", viewResult.ViewName); 
+            var categoryId = 1;
+            mockService.Setup(service => service.AddCategoryToRecipe(recipeId, categoryId)).Verifiable();
+            var result = await recipesController.AddCategoryToRecipe(recipeId, categoryId) as RedirectResult;
+            Assert.NotNull(result);
+            Assert.Equal("http://localhost:4200/LogInUser/" + UserService.getUserId(), result.Url);
             mockService.Verify();
         }
-
-        [Fact]
-        public void TestNewRecipe()
-        {
-            var mockService = new Mock<IRecipeService>();
-            var recipesController = new RecipesController(mockService.Object);
-            var result = recipesController.NewRecipe();
-            var viewResult = Assert.IsType<ViewResult>(result);
-            Assert.Equal("", viewResult.ViewName);
-        }
-        //[Fact]
-        //public async void TestRecipesByIngredientAction()
-        //{
-        //    int ingredientId = 2;
-        //    var recipes = new List<Recipe>() {
-        //    new Recipe()
-        //    {},
-        //    new Recipe()
-        //    {},
-        //   };
-
-        //    Mock<IRecipeService> mockRecipe = new Mock<IRecipeService>();
-        //    mockRecipe
-        //        .Setup(s => s.GetRecipesByIngredient(ingredientId))
-        //        .ReturnsAsync(recipes);
-        //    RecipesController recipesController = new RecipesController(mockRecipe.Object);
-        //    var result = await recipesController.RecipesByIngredient(ingredientId);
-
-        //    Assert.IsType<ViewResult>(result);
-
-        //    var viewResult =(ViewResult)result;
-        //    var model = Assert.IsAssignableFrom<IEnumerable<Recipe>>(viewResult.ViewData.Model);
-        //    Assert.Equal(2, model.Count());
-        //}
-
-        //[Fact]
-        //public async void TestRecipesByCategoryAction()
-        //{
-        //    int categoryId = 2;
-        //    var recipes = new List<Recipe>() {
-        //    new Recipe()
-        //    {},
-        //    new Recipe()
-        //    {},
-        //   };
-
-        //    Mock<IRecipeService> mockRecipe = new Mock<IRecipeService>();
-        //    mockRecipe
-        //        .Setup(s => s.GetRecipesByCategory(categoryId))
-        //        .ReturnsAsync(recipes);
-        //    RecipesController recipesController = new RecipesController(mockRecipe.Object);
-        //    var result = await recipesController.RecipeByCategory(categoryId);
-        //    Assert.IsType<ViewResult>(result);
-        //    var viewResult = (ViewResult)result;
-        //    var model = Assert.IsAssignableFrom<IEnumerable<Recipe>>(viewResult.ViewData.Model);
-        //    Assert.Equal(2, model.Count());
-        //}
-
-
     }
 }

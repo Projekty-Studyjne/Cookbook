@@ -113,24 +113,5 @@ namespace CookbookMVCBLL.Controllers
             return Redirect("http://localhost:4200/LogInUser/"+UserService.getUserId());
         }
 
-        [HttpGet]
-        public IActionResult NewRecipe()
-        {
-            Recipe recipe = new Recipe();
-            return View(recipe);
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> NewRecipe([Bind("recipeId,title,description,instructions,preparation_time,servings")] Recipe recipe)
-        {
-            service.Add(recipe);
-            //return RedirectToAction("Create", "IngredientRecipe", new { id = recipe.recipeId });
-            //return View(recipe);
-            ViewBag.NewRecipeId = recipe.recipeId;
-
-            return RedirectToAction("Create", "IngredientRecipes");
-        }
-
     }
 }

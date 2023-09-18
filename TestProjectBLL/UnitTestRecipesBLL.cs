@@ -166,7 +166,7 @@ namespace TestProjectBLL
                     description = "Test Description"
                 };
                 recipeRepository.Insert(recipe);
-                recipeService.AddCategoryToRecipe(recipe.recipeId, category);
+                recipeService.AddCategoryToRecipe(recipe.recipeId, category.categoryId);
                 var updatedRecipe = (recipeRepository.GetAsync(r => r.recipeId == recipe.recipeId)).Result;
                 Assert.NotNull(updatedRecipe);
             }

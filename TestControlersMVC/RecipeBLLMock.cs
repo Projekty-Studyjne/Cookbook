@@ -62,5 +62,15 @@ namespace TestControlersMVC
         {
             throw new NotImplementedException();
         }
+
+        public int GetMaxId()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task AddCategoryToRecipe(int recipeId, int categoryId)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
