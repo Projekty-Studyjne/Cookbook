@@ -15,7 +15,7 @@ namespace CookbookMVCBLL.Controllers
     public class CategoryRecipesController : Controller
     {
         private ICategoryRecipeService service;
-
+        private static int recipeIdtemp, categoryIdtemp;
         public CategoryRecipesController(ICategoryRecipeService service)
         {
             this.service = service;
@@ -33,8 +33,10 @@ namespace CookbookMVCBLL.Controllers
             return View(categoryRecipe);
         }
 
-        public IActionResult Create()
+        public IActionResult Create(int categoryId)
         {
+            categoryIdtemp = categoryId;
+            recipeIdtemp = (int)TempData["recipeId"];
             return View();
         }
 
@@ -46,6 +48,14 @@ namespace CookbookMVCBLL.Controllers
             service.Add(categoryRecipe);
             return RedirectToAction(nameof(Index));
             return View(categoryRecipe);
+        }
+        public IActionResult AddToDatabase(CategoryRecipe categoryRecipe)
+        {
+            CategoryRecipe categoryRecipeTemp = new CategoryRecipe();
+            categoryRecipeTemp.recipeId = recipeIdtemp;
+            categoryRecipeTemp.categoryId = categoryIdtemp;
+            service.Add(categoryRecipeTemp);
+            return RedirectToAction("AccountPanel", "Users");
         }
 
         public async Task<IActionResult> Edit(int id)

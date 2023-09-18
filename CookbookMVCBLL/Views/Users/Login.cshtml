@@ -6,35 +6,73 @@
 <head>
     <title>Login</title>
     <style>
-        html{
+        .frame {
+            width: 320px;
+            margin: 0 auto;
+            margin-top: 100px;
+            padding: 20px;
+            border: 1px solid #ccc;
+            background-color: #FBF1E7;
+            linear-gradient(145deg, #957d76, #b1958c);
+            border-radius: 5px;
+            box-shadow: 12px 12px 20px #bdbdbd, -12px -12px 20px #ffffff;
             text-align: center;
-            vertical-align: middle;
-        }
-
-        body {
-            background-color:white;
-            color: black;
-            font-family: sans-serif;
-            text-align:center;
-            vertical-align: middle;
         }
 
         h1 {
-            text-align:center;
-            vertical-align: middle
-            font-size: 2em;
-            margin-bottom: 1em;
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: #333;
         }
 
-        .frame{
-            width:400px;
-            text-align: center;
-            vertical-align: middle;
-            border-style: solid;
-            border-color:black;
-            border-width: 2px;
-            border-radius: 10%;
+        form div {
+            margin-bottom: 15px;
+            text-align: left;
         }
+
+        label {
+            display: block;
+            font-weight: bold;
+        }
+
+        input[type="text"],
+        input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            font-size: 16px;
+        }
+
+        .text-danger {
+            color: #f00;
+        }
+
+        input[type="submit"] {
+            background-color: #773F26;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 18px;
+            cursor: pointer;
+            text-align: center;
+            width: 100%;
+        }
+
+        a {
+            display: block;
+            text-align: center;
+            margin-top: 15px;
+            text-decoration: none;
+            color: #773F26;
+            font-weight: bold
+        }
+
+            a:hover {
+                text-decoration: underline;
+                color: #4A2718;
+            }
 
     </style>
 </head>
@@ -55,12 +93,12 @@
         <div>
             <span class="text-danger">@Html.ValidationMessage("InvalidCredentials")</span>
         </div>
-        <div>
+            <div class="form-group">
             <input type="submit" value="Login" >
         </div>
     </form>
 
-    <a href="/Users/Register">Register</a>
+    Don't have an account yet? <a href="/Users/Register">Register</a>
     </div>
 </body>
 </html>

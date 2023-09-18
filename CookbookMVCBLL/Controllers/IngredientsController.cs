@@ -115,11 +115,11 @@ namespace CookbookMVCBLL.Controllers
             return View();
         }
 
-        [HttpPost]
-        public IActionResult ChooseCategory()
-        {
-            return RedirectToAction("Index","Categories");
-        }
+        //[HttpPost]
+        //public IActionResult ChooseCategory()
+        //{
+        //    return RedirectToAction("Index","Categories");
+        //}
 
         //public Task<IActionResult> AdIngredientToList(SelectedIngredients model, int ingredientId)
         //{
