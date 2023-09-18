@@ -40,7 +40,6 @@ namespace CookbookMVCBLL.Controllers
 
         public IActionResult Create(int ingredientId)
         {
-            //var ingredientIds = new List<int> { 1, 2, 3 };
             ingredientIdtemp = ingredientId;
             recipeIdtemp = RecipeService.getRecipeId();
             return View();
