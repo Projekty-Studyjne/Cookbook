@@ -116,6 +116,7 @@ namespace CookbookMVCBLL.Controllers
                 
             if (authenticatedUser != null)
                 {
+                UserService.setUserId(authenticatedUser.userId);
                 return RedirectToAction("AccountPanel", "Users", new { id = authenticatedUser.userId});
                 }
                 else

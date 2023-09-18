@@ -14,6 +14,7 @@ namespace CookbookBLL
     public class UserService : IUserService
     {
         private readonly IUnitOfWork _unitOfWork;
+        private static int userId;
         public UserService(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
@@ -91,6 +92,15 @@ namespace CookbookBLL
             .GetAsync(filter: r => r.ratingId == ratingId, includeProperties: "User");
 
             return user.FirstOrDefault()?.User;
+        }
+
+        public static void setUserId(int id)
+        {
+            userId = id;
+        }
+        public static int getUserId()
+        {
+            return userId;
         }
     }
 }

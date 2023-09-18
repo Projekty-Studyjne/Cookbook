@@ -82,7 +82,7 @@ namespace CookbookWebApi.Controllers
             Category category = new Category();
             category.name = categoryReq.name;
             category.description = categoryReq.description;  
-            if (_recipeService.AddCategoryToRecipe(id,category).IsCompletedSuccessfully)
+            if (_recipeService.AddCategoryToRecipe(id,category.categoryId).IsCompletedSuccessfully)
             {
                 return true;
             }

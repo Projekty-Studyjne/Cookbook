@@ -42,7 +42,7 @@ namespace CookbookMVCBLL.Controllers
         {
             //var ingredientIds = new List<int> { 1, 2, 3 };
             ingredientIdtemp = ingredientId;
-            recipeIdtemp = (int)TempData["recipeId"];
+            recipeIdtemp = RecipeService.getRecipeId();
             return View();
         }
 

@@ -14,6 +14,7 @@ using System.Xml;
 using CookbookBLL.Interfaces;
 using System.Diagnostics;
 using NuGet.Protocol;
+using CookbookBLL;
 
 namespace CookbookMVC.Controllers
 {
@@ -43,17 +44,13 @@ namespace CookbookMVC.Controllers
             return View();
         }
 
-     
+
         public IActionResult AddCategoryToRecipe(int categoryId)
         {
-            int recipeId = 1;
-            if (TempData["recipeId"] != null)
-            {
-                recipeId = (int)TempData["recipeId"];
-                // Dalsza logika
-            }
+            int recipeId = RecipeService.getRecipeId();
             return RedirectToAction("AddCategoryToRecipe", "Recipes", new { categoryId = categoryId, recipeId = recipeId });
         }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("categoryId,name,description")] Category category)

@@ -12,12 +12,14 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
 using CookbookLibrary;
+using System.Runtime.CompilerServices;
 
 namespace CookbookBLL
 {
     public class RecipeService : IRecipeService
     {
         private readonly IUnitOfWork _unitOfWork;
+        private static int _recipeId;
         public RecipeService(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
@@ -131,28 +133,7 @@ namespace CookbookBLL
 
         public async Task AddCategoryToRecipe(int recipeId, int categoryId)
         {
-            var recipe = _unitOfWork.RecipeRepository.GetByID(recipeId);
-
-            if (recipe == null)
-            {
-                throw new Exception("Recipe not found");
-            }
-
-            var category = _unitOfWork.CategoryRepository.GetByID(categoryId);
-
-            if (category == null)
-            {
-                throw new Exception("Category not found");
-            }
-
-            var existingCategoryRecipe = recipe.CategoryRecipes.SingleOrDefault(cr => cr.categoryId == categoryId);
-
-            if (existingCategoryRecipe != null)
-            {
-                throw new Exception("Category already assigned to recipe");
-            }
-
-            var categoryRecipe = new CategoryRecipe { Recipe = recipe, Category = category };
+            CategoryRecipe categoryRecipe = new CategoryRecipe { recipeId= recipeId, categoryId = categoryId };
             _unitOfWork.CategoryRecipeRepository.Insert(categoryRecipe);
             _unitOfWork.Save();
         }
@@ -164,6 +145,16 @@ namespace CookbookBLL
             var recipes = _unitOfWork.RecipeRepository.GetAsync();
             return recipes.Result.Max(r => r.recipeId);
 
+        }
+
+        public static void setRecipeId(int id)
+        {
+            _recipeId = id;
+        }
+
+        public static int getRecipeId()
+        {
+            return _recipeId;
         }
     }
 }
